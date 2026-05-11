@@ -1,0 +1,44 @@
+<% var title = 'Leaderboard'; %>
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+
+<section>
+  <h1>Leaderboard</h1>
+  <p>Ranking por (retos verdes DESC, tiempo total ASC). Marca tu fin con el boton de la home cuando termines.</p>
+
+  <% if (!ranking.length) { %>
+    <p class="warn">Nadie se ha registrado todavia. Comienza en <a href="/submit">/submit</a>.</p>
+  <% } else { %>
+    <table class="ranking">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Matricula</th>
+          <th>Verdes</th>
+          <% challenges.forEach(function(c) { %><th><%= c.id %></th><% }) %>
+          <th>Tiempo (min)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ranking.forEach(function(r, i) { %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= r.nombre %></td>
+            <td><%= r.matricula || '-' %></td>
+            <td><strong><%= r.retosVerdes %></strong> / <%= challenges.length %></td>
+            <% challenges.forEach(function(c) { %>
+              <td class="<%= r.retos[c.id] && r.retos[c.id].verde ? 'ok' : (r.retos[c.id] ? 'fail' : 'pending') %>">
+                <%= r.retos[c.id] && r.retos[c.id].verde ? 'V' : (r.retos[c.id] ? 'X' : '-') %>
+              </td>
+            <% }) %>
+            <td><%= r.tiempoMinutos != null ? r.tiempoMinutos.toFixed(1) : '-' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/end') %>

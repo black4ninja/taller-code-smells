@@ -1,0 +1,12 @@
+<% var title = 'Error'; %>
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+
+<section>
+  <h1>Algo salio mal</h1>
+  <p class="fail"><%= message %></p>
+  <p><a href="/">Volver al dashboard</a></p>
+</section>
+
+<%- include('partials/end') %>

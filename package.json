@@ -1,0 +1,40 @@
+{
+  "name": "taller-code-smells",
+  "version": "1.0.0",
+  "description": "Refactor Race - Taller de code smells y refactorizacion (TC3004B ITESM)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
+    "test": "jest --testPathPattern=tests/refactor --runInBand --forceExit",
+    "test:verbose": "jest --testPathPattern=tests/refactor --runInBand --forceExit --verbose",
+    "test:c0": "jest --testPathPattern=tests/refactor/C0",
+    "test:c1": "jest --testPathPattern=tests/refactor/C1",
+    "test:c2": "jest --testPathPattern=tests/refactor/C2",
+    "test:c3": "jest --testPathPattern=tests/refactor/C3",
+    "test:c4": "jest --testPathPattern=tests/refactor/C4",
+    "test:c5": "jest --testPathPattern=tests/refactor/C5",
+    "test:c6": "jest --testPathPattern=tests/refactor/C6",
+    "test:watch": "jest --testPathPattern=tests/refactor --watch",
+    "quality": "node scripts/verify-quality.js",
+    "lock-tests": "node scripts/lock-tests.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "ejs": "^3.1.10",
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
+    "jscpd": "^4.0.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 20000
+  }
+}

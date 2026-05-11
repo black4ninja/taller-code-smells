@@ -1,0 +1,36 @@
+<% var title = 'Refactor Race - Dashboard'; %>
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+
+<section class="intro">
+  <h1>Refactor Race</h1>
+  <p>Implementa 7 funciones. Los tests no solo validan que funcionen: tambien miden lineas,
+  complejidad, anidamiento, switches y duplicacion. Pasa los 7 con codigo limpio.</p>
+  <% if (submitter) { %>
+    <p><strong>Participante:</strong> <%= submitter.nombre %> <% if (submitter.matricula) { %>(<%= submitter.matricula %>)<% } %></p>
+  <% } else { %>
+    <p class="warn">No te has registrado todavia. <a href="/submit">Registrate aqui</a> para aparecer en el leaderboard.</p>
+  <% } %>
+  <p>
+    <strong>Como empezar:</strong>
+    1) Lee <code>docs/WALKTHROUGH.md</code> para ver C0 resuelto paso a paso.
+    2) Abre <code>src/challenges/c0_warmup_total.js</code> y editalo.
+    3) Corre <code>npm run test:c0</code> (o pulsa "Correr tests" abajo).
+    4) Cuando este verde, sigue con C1.
+  </p>
+</section>
+
+<section class="grid">
+  <% challenges.forEach(function(c) { %>
+    <%- include('partials/challenge_card', { c: c, status: status }) %>
+  <% }) %>
+</section>
+
+<section class="actions">
+  <form method="POST" action="/finalize" onsubmit="return confirm('Finalizar y registrar tu tiempo total?');">
+    <button class="btn btn-finalize" type="submit">Marcar fin (registrar tiempo)</button>
+  </form>
+</section>
+
+<%- include('partials/end') %>

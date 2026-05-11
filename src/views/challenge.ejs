@@ -1,0 +1,45 @@
+<% var title = challenge.id + ' - ' + challenge.titulo; %>
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+
+<section class="challenge-detail">
+  <a href="/" class="back">&lt; volver</a>
+  <h1><%= challenge.id %> - <%= challenge.titulo %></h1>
+
+  <dl class="meta">
+    <dt>Code smell</dt><dd><%= challenge.smell %></dd>
+    <dt>Tecnica</dt><dd><%= challenge.tecnica %></dd>
+    <dt>Principios</dt><dd><%= challenge.principios %></dd>
+    <dt>Archivo a editar</dt><dd><code><%= challenge.archivo %></code></dd>
+    <dt>Tiempo sugerido</dt><dd><%= challenge.tiempoMin %> minutos</dd>
+  </dl>
+
+  <h2>Descripcion</h2>
+  <p><%= challenge.descripcion %></p>
+
+  <h2>Restricciones (lo que el test va a checar)</h2>
+  <ul>
+    <% challenge.restricciones.forEach(function(r) { %>
+      <li><%= r %></li>
+    <% }) %>
+  </ul>
+
+  <h2>Correr tests</h2>
+  <p>CLI: <code>npm run test:<%= challenge.id.toLowerCase() %></code></p>
+  <button class="btn btn-run" data-id="<%= challenge.id %>" data-pattern="tests/refactor/<%= challenge.id %>">Correr en este dashboard</button>
+  <pre class="card-output" id="out-<%= challenge.id %>"></pre>
+
+  <% if (lastResult) { %>
+    <h2>Ultimo resultado registrado</h2>
+    <p>Estado: <strong class="<%= lastResult.verde ? 'ok' : 'fail' %>"><%= lastResult.verde ? 'VERDE' : 'ROJO' %></strong> (<%= lastResult.passed %>/<%= lastResult.total %>)</p>
+    <% if (lastResult.fails && lastResult.fails.length) { %>
+      <p>Tests fallidos:</p>
+      <ul>
+        <% lastResult.fails.forEach(function(f) { %><li><%= f %></li><% }) %>
+      </ul>
+    <% } %>
+  <% } %>
+</section>
+
+<%- include('partials/end') %>

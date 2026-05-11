@@ -1,0 +1,25 @@
+<% var title = 'Registrarse'; %>
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/header') %>
+<main class="container">
+
+<section>
+  <h1>Registrate al race</h1>
+  <% if (current) { %>
+    <p class="ok">Ya estas registrado como <strong><%= current.nombre %></strong> <% if (current.matricula) { %>(<%= current.matricula %>)<% } %>. Inicio: <%= current.iniciadoEn %></p>
+    <p>Puedes actualizar tus datos abajo si te equivocaste.</p>
+  <% } %>
+  <form method="POST" action="/submit">
+    <label>
+      Nombre
+      <input name="nombre" required minlength="2" value="<%= current ? current.nombre : '' %>">
+    </label>
+    <label>
+      Matricula (opcional)
+      <input name="matricula" value="<%= current ? current.matricula : '' %>">
+    </label>
+    <button class="btn" type="submit">Guardar</button>
+  </form>
+</section>
+
+<%- include('partials/end') %>
