@@ -76,10 +76,20 @@
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  // Mapeo lenguaje del toolkit -> identificador de highlight.js
+  const HLJS_LANG = {
+    javascript: 'javascript',
+    python:     'python',
+    cpp:        'cpp',
+    kotlin:     'kotlin',
+    swift:      'swift',
+  };
+
   function renderDetail() {
     const item = data.items.find((i) => i.id === currentId) || data.items[0];
     if (!item) return;
     const code = escapeHtml(item.examples[currentLang] || '// sin ejemplo en este lenguaje');
+    const hljsClass = HLJS_LANG[currentLang] || 'plaintext';
     detailEl.innerHTML = `
       <header class="tk-detail-head">
         <h2>${item.name}</h2>
@@ -95,9 +105,18 @@
       </section>
       <section>
         <h3>Ejemplo</h3>
-        <pre class="tk-code">${code}</pre>
+        <pre class="tk-code"><code class="language-${hljsClass} hljs">${code}</code></pre>
       </section>
     `;
+    // Aplicar syntax highlighting
+    if (window.hljs) {
+      const codeEl = detailEl.querySelector('pre code');
+      if (codeEl) {
+        // Forzar re-highlight aunque el elemento ya tenga la clase
+        codeEl.removeAttribute('data-highlighted');
+        try { window.hljs.highlightElement(codeEl); } catch (e) { /* silent */ }
+      }
+    }
   }
 
   function render() {

@@ -403,13 +403,23 @@ form input {
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
-  padding: 14px 16px;
+  padding: 0;
   color: #c9d1d9;
   font-size: 12.5px;
   line-height: 1.5;
   overflow-x: auto;
   margin: 0;
   white-space: pre;
+  font-family: inherit;
+}
+/* Overrides para que el tema github-dark de hljs respete nuestro contenedor */
+.tk-code code.hljs {
+  display: block;
+  background: transparent;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 12.5px;
+  line-height: 1.5;
 }
 
 .tk-foot {
