@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Refactor Race - Introduccion (TC3004B)</title>
+<title>Refactor Race - Introducción (TC3004B)</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: #0d1117; color: #c9d1d9;
@@ -88,37 +88,37 @@
 |_| \_\___|_|  \__,_|\___|\__\___/|_|   |_| \_\__,_|\___\___|
     </pre>
     <h1>Refactor Race</h1>
-    <p class="subtitle">Taller de identificacion y refactorizacion de code smells</p>
-    <p class="subtitle">TC3004B - ITESM</p>
-    <p style="margin-top: 32px;" class="small">Duracion: 1h 40min. Usa <kbd>&rarr;</kbd> o <kbd>espacio</kbd> para avanzar.</p>
+    <p class="subtitle">Taller de identificación y refactorización de code smells</p>
+    <p class="subtitle">TC3004B · ITESM</p>
+    <p style="margin-top: 32px;" class="small">Duración: 1h 40min. Usa <kbd>&rarr;</kbd> o <kbd>espacio</kbd> para avanzar.</p>
   </section>
 
   <!-- Slide 2: Objetivo -->
   <section class="slide">
     <h2>El objetivo de hoy</h2>
     <p>Implementar 7 funciones desde cero.</p>
-    <p>Pero con una <span class="accent">trampa pedagogica</span>: los tests no solo validan que <span class="ok">funcionen</span>. Tambien miden:</p>
+    <p>Pero con una <span class="accent">trampa pedagógica</span>: los tests no solo validan que <span class="ok">funcionen</span>. También miden:</p>
     <ul>
-      <li>lineas por funcion (LOC)</li>
-      <li>complejidad ciclomatica</li>
+      <li>líneas por función (LOC)</li>
+      <li>complejidad ciclomática</li>
       <li>anidamiento</li>
-      <li>numero de parametros</li>
+      <li>número de parámetros</li>
       <li>uso de <code>switch</code>, <code>if</code>, <code>+=</code> sobre strings</li>
-      <li>duplicacion</li>
+      <li>duplicación</li>
     </ul>
     <p style="margin-top: 18px;" class="accent">El junior que llevas dentro hoy va a sufrir. Y a aprender.</p>
   </section>
 
-  <!-- Slide 3: Definicion -->
+  <!-- Slide 3: Definición -->
   <section class="slide">
-    <h2>&iquest;Que es un <em>code smell</em>?</h2>
+    <h2>¿Qué es un <em>code smell</em>?</h2>
     <blockquote class="quote">
-      "Un code smell es una pista superficial que habitualmente corresponde a un problema mas profundo en el sistema."
-      <span class="who">- Martin Fowler, <em>Refactoring</em> (1999)</span>
+      «Un code smell es una pista superficial que habitualmente corresponde a un problema más profundo en el sistema.»
+      <span class="who">— Martin Fowler, <em>Refactoring</em> (1999)</span>
     </blockquote>
-    <p style="margin-top: 24px;"><strong>Clave:</strong> el codigo <span class="ok">funciona</span>, pero <span class="fail">huele mal</span>.</p>
-    <p>Smell = sintoma. Refactor = tratamiento. No confundir.</p>
-    <p class="small" style="margin-top: 12px;">Buenos linters detectan algunos automaticamente. Para el resto: experiencia + revision.</p>
+    <p style="margin-top: 24px;"><strong>Clave:</strong> el código <span class="ok">funciona</span>, pero <span class="fail">huele mal</span>.</p>
+    <p>Smell = síntoma. Refactor = tratamiento. No los confundas.</p>
+    <p class="small" style="margin-top: 12px;">Los buenos linters detectan algunos automáticamente. Para el resto: experiencia y revisión.</p>
   </section>
 
   <!-- Slide 4: Los 11 smells del temario -->
@@ -128,22 +128,22 @@
       <div class="card"><span class="num">1</span><div class="name">Rigidez</div><div class="why">Cambiar X obliga a cambiar Y, Z, W.</div></div>
       <div class="card"><span class="num">2</span><div class="name">Fragilidad</div><div class="why">Un cambio rompe cosas no relacionadas.</div></div>
       <div class="card"><span class="num">3</span><div class="name">Inmovilidad</div><div class="why">No puedes reusar un componente fuera.</div></div>
-      <div class="card"><span class="num">4</span><div class="name">Viscosidad</div><div class="why">El atajo malo es mas facil que el bueno.</div></div>
-      <div class="card"><span class="num">5</span><div class="name">Codigo duplicado</div><div class="why">El mismo bloque en varios lugares.</div></div>
-      <div class="card"><span class="num">6</span><div class="name">Metodo largo</div><div class="why">&gt; 15-20 lineas. Hace muchas cosas.</div></div>
+      <div class="card"><span class="num">4</span><div class="name">Viscosidad</div><div class="why">El atajo malo es más fácil que el bueno.</div></div>
+      <div class="card"><span class="num">5</span><div class="name">Código duplicado</div><div class="why">El mismo bloque en varios lugares.</div></div>
+      <div class="card"><span class="num">6</span><div class="name">Método largo</div><div class="why">Más de 15-20 líneas. Hace muchas cosas.</div></div>
       <div class="card"><span class="num">7</span><div class="name">Clase grande</div><div class="why">God object. Demasiadas responsabilidades.</div></div>
-      <div class="card"><span class="num">8</span><div class="name">Lista larga de parametros</div><div class="why">&gt; 3-4 args sueltos del mismo dominio.</div></div>
-      <div class="card"><span class="num">9</span><div class="name">Obsesion primitiva</div><div class="why">Strings/ints para representar dominio.</div></div>
-      <div class="card"><span class="num">10</span><div class="name">Envidia de caracteristicas</div><div class="why">Metodo que usa mas de otra clase.</div></div>
+      <div class="card"><span class="num">8</span><div class="name">Lista larga de parámetros</div><div class="why">Más de 3-4 args sueltos del mismo dominio.</div></div>
+      <div class="card"><span class="num">9</span><div class="name">Obsesión primitiva</div><div class="why">Strings o ints para representar dominio.</div></div>
+      <div class="card"><span class="num">10</span><div class="name">Envidia de características</div><div class="why">Método que usa más datos de otra clase.</div></div>
       <div class="card"><span class="num">11</span><div class="name">Switch excesivo</div><div class="why"><code>switch(tipo)</code> con muchas ramas.</div></div>
     </div>
-    <p class="small" style="margin-top: 18px;">Hoy tocaremos los marcados en los 7 retos del taller.</p>
+    <p class="small" style="margin-top: 18px;">Hoy tocaremos los más representativos en los 7 retos del taller.</p>
   </section>
 
   <!-- Slide 5: Switch excesivo (C1) -->
   <section class="slide">
     <h2>Smell #11: <span class="fail">Switch excesivo</span></h2>
-    <p>Reto <code>C1</code>. Cada vez que agregas un tipo, tocas la funcion. Viola <strong>OCP</strong>.</p>
+    <p>Reto <code>C1</code>. Cada vez que agregas un tipo, tocas la función. Viola <strong>OCP</strong>.</p>
     <div class="columns">
       <div>
         <span class="pre-label bad">junior</span>
@@ -172,13 +172,13 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
     </div>
-    <p style="margin-top: 14px;"><strong>Tecnica:</strong> <em>Replace Conditional with Polymorphism</em> (en JS: map de estrategias).</p>
+    <p style="margin-top: 14px;"><strong>Técnica:</strong> <em>Replace Conditional with Polymorphism</em> (en JS: mapa de estrategias).</p>
   </section>
 
   <!-- Slide 6: Long params + nesting (C2) -->
   <section class="slide">
-    <h2>Smell #8: <span class="fail">Lista larga de parametros</span></h2>
-    <p>Reto <code>C2</code>. Acompanyado de anidamiento profundo (Rigidez).</p>
+    <h2>Smell #8: <span class="fail">Lista larga de parámetros</span></h2>
+    <p>Reto <code>C2</code>. Acompañado de anidamiento profundo (Rigidez).</p>
     <div class="columns">
       <div>
         <span class="pre-label bad">junior</span>
@@ -206,12 +206,12 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
     </div>
-    <p style="margin-top: 14px;"><strong>Tecnicas:</strong> <em>Introduce Parameter Object</em> + <em>Guard Clauses</em> (early return).</p>
+    <p style="margin-top: 14px;"><strong>Técnicas:</strong> <em>Introduce Parameter Object</em> + <em>Guard Clauses</em> (early return).</p>
   </section>
 
-  <!-- Slide 7: Obsesion primitiva (C3) -->
+  <!-- Slide 7: Obsesión primitiva (C3) -->
   <section class="slide">
-    <h2>Smell #9: <span class="fail">Obsesion primitiva</span></h2>
+    <h2>Smell #9: <span class="fail">Obsesión primitiva</span></h2>
     <p>Reto <code>C3</code>. Strings sueltos para algo que es un concepto del dominio.</p>
     <div class="columns">
       <div>
@@ -224,7 +224,7 @@ function descuento(tipo, monto) {
   if (calle) r += calle;
   if (numero) r += ' ' + numero;
   if (colonia) r += ', ' + colonia;
-  // ... 4 ifs mas con +=
+  // ... 4 ifs más con +=
   return r;
 }</pre>
       </div>
@@ -242,13 +242,13 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
     </div>
-    <p style="margin-top: 14px;"><strong>Tecnicas:</strong> <em>Parameter Object</em> + <code>filter(Boolean).join()</code> en lugar de <code>+=</code>.</p>
+    <p style="margin-top: 14px;"><strong>Técnicas:</strong> <em>Parameter Object</em> + <code>filter(Boolean).join()</code> en lugar de <code>+=</code>.</p>
   </section>
 
-  <!-- Slide 8: Metodo largo (C0, C4) -->
+  <!-- Slide 8: Método largo (C0, C4) -->
   <section class="slide">
-    <h2>Smell #6: <span class="fail">Metodo largo</span></h2>
-    <p>Retos <code>C0</code> y <code>C4</code>. Una funcion que hace 5 cosas tiene 5 razones para cambiar.</p>
+    <h2>Smell #6: <span class="fail">Método largo</span></h2>
+    <p>Retos <code>C0</code> y <code>C4</code>. Una función que hace 5 cosas tiene 5 razones para cambiar.</p>
     <div class="columns">
       <div>
         <span class="pre-label bad">junior</span>
@@ -283,15 +283,15 @@ function total(items) {
 }</pre>
       </div>
     </div>
-    <p style="margin-top: 14px;"><strong>Tecnica:</strong> <em>Extract Method</em>. Una funcion = una idea.</p>
+    <p style="margin-top: 14px;"><strong>Técnica:</strong> <em>Extract Method</em>. Una función = una idea.</p>
   </section>
 
-  <!-- Slide 9: Tecnicas y principios -->
+  <!-- Slide 9: Técnicas y principios -->
   <section class="slide">
-    <h2>El arsenal: tecnicas + principios</h2>
+    <h2>El arsenal: técnicas + principios</h2>
     <div class="columns">
       <div>
-        <h3 style="color: #79c0ff;">9 tecnicas de refactor</h3>
+        <h3 style="color: #79c0ff;">9 técnicas de refactor</h3>
         <ul class="small">
           <li><strong>Extract Method</strong> &mdash; saca bloques cohesivos</li>
           <li><strong>Replace Conditional with Polymorphism</strong> &mdash; mata el switch</li>
@@ -300,7 +300,7 @@ function total(items) {
           <li><strong>Move Method</strong> &mdash; ponlo donde pertenece</li>
           <li><strong>Compose Method</strong> &mdash; orquestador delgado</li>
           <li><strong>Guard Clauses</strong> &mdash; early return</li>
-          <li><strong>Null Object</strong> &mdash; mata los if x === null</li>
+          <li><strong>Null Object</strong> &mdash; mata los <code>if x === null</code></li>
           <li><strong>Dependency Injection</strong> &mdash; recibe, no instancies</li>
         </ul>
       </div>
@@ -309,40 +309,40 @@ function total(items) {
         <ul class="small">
           <li><strong>SOLID</strong>
             <ul>
-              <li>SRP: una razon para cambiar</li>
+              <li>SRP: una razón para cambiar</li>
               <li>OCP: abierto a extender, cerrado a modificar</li>
-              <li>LSP: subtipos no rompen</li>
-              <li>ISP: interfaces minimas</li>
+              <li>LSP: los subtipos no rompen al padre</li>
+              <li>ISP: interfaces mínimas</li>
               <li>DIP: depende de abstracciones</li>
             </ul>
           </li>
           <li><strong>DRY</strong> &mdash; no te repitas</li>
           <li><strong>KISS</strong> &mdash; no compliques sin necesidad</li>
-          <li><strong>Tell, Don't Ask</strong> &mdash; pidele al objeto que actue</li>
+          <li><strong>Tell, Don't Ask</strong> &mdash; pídele al objeto que actúe</li>
           <li><strong>Law of Demeter</strong> &mdash; habla solo con tus amigos</li>
         </ul>
       </div>
     </div>
-    <p class="small" style="margin-top: 16px;">Ver <code>docs/REFACTOR_CHEATSHEET.md</code> con plantillas antes/despues.</p>
+    <p class="small" style="margin-top: 16px;">Consulta <code>docs/REFACTOR_CHEATSHEET.md</code> con plantillas antes/después.</p>
   </section>
 
-  <!-- Slide 10: Anatomia de un reto -->
+  <!-- Slide 10: Anatomía de un reto -->
   <section class="slide">
-    <h2>Anatomia de un reto</h2>
+    <h2>Anatomía de un reto</h2>
     <ol>
-      <li>Abre <code>tests/refactor/CN_*.test.js</code> &mdash; lee que quiere</li>
-      <li>Abre <code>src/challenges/cN_*.js</code> &mdash; <span class="accent">aqui escribes</span></li>
-      <li>Escribe la version <strong>junior</strong>: lo primero que se te ocurra</li>
-      <li>Corre <code>npm run test:cN</code> &mdash; veras rojo</li>
-      <li>El mensaje del test te <strong>nombra el smell</strong> y sugiere la <strong>tecnica</strong>:</li>
+      <li>Abre <code>tests/refactor/CN_*.test.js</code> &mdash; lee qué pide</li>
+      <li>Abre <code>src/challenges/cN_*.js</code> &mdash; <span class="accent">aquí escribes</span></li>
+      <li>Escribe la versión <strong>junior</strong>: lo primero que se te ocurra</li>
+      <li>Corre <code>npm run test:cN</code> &mdash; verás rojo</li>
+      <li>El mensaje del test te <strong>nombra el smell</strong> y sugiere la <strong>técnica</strong>:</li>
     </ol>
-<pre style="margin-top: 8px;">  La funcion "calcularDescuento" tiene 24 lineas (limite: 10).
-  <span class="fail">Smell: Metodo largo.</span>
-  <span class="ok">Tecnica sugerida: Extract Method.</span>
+<pre style="margin-top: 8px;">  La función "calcularDescuento" tiene 24 líneas (límite: 10).
+  <span class="fail">Smell: Método largo.</span>
+  <span class="ok">Técnica sugerida: Extract Method.</span>
   Referencia: docs/REFACTOR_CHEATSHEET.md#extract-method</pre>
     <ol start="6">
-      <li>Refactoriza. Re-corre. Verde.</li>
-      <li>Llena tu fila en <code>docs/ENTREGABLE.md</code></li>
+      <li>Refactoriza. Vuelve a correr. Verde.</li>
+      <li>Llena tu fila en <code>docs/ENTREGABLE.md</code>.</li>
     </ol>
   </section>
 
@@ -350,15 +350,15 @@ function total(items) {
   <section class="slide">
     <h2>Reglas del race</h2>
     <ul class="checklist">
-      <li><strong>Individual.</strong> Codigo tuyo, en tu maquina.</li>
-      <li><strong>1h 40 min</strong> contados desde el banderazo.</li>
-      <li><strong>C0 es guiado</strong> &mdash; los primeros 10 min lo hago yo en pantalla con <code>docs/WALKTHROUGH.md</code>.</li>
+      <li><strong>Individual.</strong> Código tuyo, en tu máquina.</li>
+      <li><strong>1h 40min</strong> contados desde el banderazo.</li>
+      <li><strong>C0 es guiado</strong> &mdash; los primeros 10 minutos lo hago yo en pantalla con <code>docs/WALKTHROUGH.md</code>.</li>
       <li><strong>Solo editas</strong> archivos en <code>src/challenges/</code>.</li>
       <li><strong>NO toques</strong> <code>tests/refactor/</code> ni <code>src/lib/quality/</code> &mdash; hay test de integridad que detecta trampa.</li>
-      <li><strong>Gana</strong> quien tenga mas retos en verde. Desempate: tiempo en <code>/leaderboard</code>.</li>
-      <li><strong>Entregable paralelo:</strong> <code>docs/ENTREGABLE.md</code> con smell + tecnica + reflexion por reto.</li>
+      <li><strong>Gana</strong> quien tenga más retos en verde. Desempate por tiempo en <code>/leaderboard</code>.</li>
+      <li><strong>Entregable paralelo:</strong> <code>docs/ENTREGABLE.md</code> con smell, técnica y reflexión por reto.</li>
     </ul>
-    <p style="margin-top: 18px;" class="small accent">Tip: si te atoras &gt; 10 min en un reto, abre <code>REFACTOR_CHEATSHEET.md</code> y busca tu smell.</p>
+    <p style="margin-top: 18px;" class="small accent">Tip: si te atoras más de 10 minutos en un reto, abre <code>REFACTOR_CHEATSHEET.md</code> y busca tu smell.</p>
   </section>
 
   <!-- Slide 12: Empezar -->
@@ -371,10 +371,10 @@ function total(items) {
    \  /\  /./ /__/\__/ /| | | || | | |
     \/  \/ \_____|____/ \_| |_/\_| |_/
     </pre>
-    <h1 style="margin-top: 20px;">A correr.</h1>
+    <h1 style="margin-top: 20px;">¡A correr!</h1>
     <p>1. <code>git clone</code> + <code>npm install</code> + <code>npm start</code></p>
     <p>2. Abre <code>docs/WALKTHROUGH.md</code> &mdash; lo hago yo en pantalla.</p>
-    <p>3. Despues de C0: tu vs C1..C6.</p>
+    <p>3. Después de C0: tú contra C1..C6.</p>
     <p style="margin-top: 24px;" class="accent">El tiempo empieza cuando termine este slide.</p>
   </section>
 
@@ -382,7 +382,7 @@ function total(items) {
 
 <div class="footer">
   <span class="nav-hint">
-    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> o <kbd>espacio</kbd> | <kbd>F</kbd> fullscreen | <kbd>Home</kbd>/<kbd>End</kbd>
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> o <kbd>espacio</kbd> · <kbd>F</kbd> pantalla completa · <kbd>Home</kbd>/<kbd>End</kbd>
   </span>
   <div class="progress" id="progress"></div>
   <span id="counter" class="small">1 / 12</span>
