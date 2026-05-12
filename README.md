@@ -94,6 +94,17 @@ Cuando un quality gate falla, el mensaje **nombra el smell** y sugiere la **téc
 
 El dashboard ejecuta `jest` en un subproceso y muestra el resultado en vivo. La CLI sigue siendo la fuente de verdad (`npm test`). Usa el botón global al final para asegurarte de que **todo** sigue verde.
 
+### Toolkit teórico flotante
+
+En la esquina inferior derecha hay un botón **"📚 Toolkit"** (también <kbd>T</kbd> o <kbd>/</kbd>) que abre una referencia rápida con:
+
+- los **11 code smells** (qué son, cómo arreglarlos)
+- los **5 principios SOLID**
+- los **pilares de POO** (herencia, polimorfismo, encapsulación, abstracción, composición)
+- otros principios: **DRY, KISS, YAGNI, Tell Don't Ask, Law of Demeter**
+
+Cada concepto trae descripción, técnica de aplicación y un mini-ejemplo en **JavaScript, Python, C++, Kotlin y Swift**. Cambia de lenguaje con las pestañas de arriba; tu selección se recuerda.
+
 ---
 
 ## Scripts npm

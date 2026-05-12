@@ -1,0 +1,31 @@
+<!-- Botón flotante -->
+<button id="toolkit-fab" class="tk-fab" title="Toolkit teórico (T o /)">
+  <span class="tk-fab-icon">📚</span>
+  <span class="tk-fab-label">Toolkit</span>
+</button>
+
+<!-- Modal -->
+<div id="toolkit" class="tk-overlay" role="dialog" aria-modal="true" aria-labelledby="tk-title">
+  <div class="tk-modal">
+    <header class="tk-head">
+      <h2 id="tk-title">Toolkit teórico</h2>
+      <div id="toolkit-langs" class="tk-langs"></div>
+      <button id="toolkit-close" class="tk-close" aria-label="Cerrar">×</button>
+    </header>
+
+    <div class="tk-body">
+      <aside class="tk-sidebar">
+        <input id="toolkit-search" class="tk-search" type="text" placeholder="Buscar concepto..." autocomplete="off" spellcheck="false">
+        <div id="toolkit-list" class="tk-list"></div>
+      </aside>
+      <section id="toolkit-detail" class="tk-detail"></section>
+    </div>
+
+    <footer class="tk-foot">
+      <span class="small">Atajos: <kbd>T</kbd> o <kbd>/</kbd> abrir · <kbd>Esc</kbd> cerrar</span>
+    </footer>
+  </div>
+</div>
+
+<script src="/static/toolkit-data.js"></script>
+<script src="/static/toolkit.js"></script>

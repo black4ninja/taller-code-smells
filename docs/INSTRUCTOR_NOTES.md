@@ -49,6 +49,12 @@ Guía operativa del taller. **No compartir con alumnos.**
   npm test 2>&1 | grep -i integridad
   ```
 
+### Toolkit teórico flotante
+
+El dashboard tiene un botón **📚 Toolkit** (esquina inferior derecha, también atajo <kbd>T</kbd>) con referencia rápida a los 11 smells, SOLID, pilares de POO y principios (DRY/KISS/YAGNI/Tell Don't Ask/LoD). Cada concepto trae descripción, cómo aplicarlo y mini-ejemplo en JS / Python / C++ / Kotlin / Swift.
+
+Recurso pensado para alumnos que olvidaron qué significa "polimorfismo" o "DIP" en medio del reto — pueden consultar sin salir del dashboard.
+
 ### Hints para dar (sin spoilear)
 
 - **C1 atorado:** "¿Qué pasaría si las tasas fueran un objeto en lugar de un `switch`?"
