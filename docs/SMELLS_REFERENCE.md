@@ -1,123 +1,123 @@
 # Smells Reference — 11 code smells del temario
 
-Resumen rapido (sintoma -> ejemplo -> tecnica).
+Resumen rápido (síntoma → ejemplo → técnica).
 
 ---
 
 ## 1. Rigidez
 
-**Sintoma:** Dificultad para cambiar el software, incluso de formas sencillas. Un cambio
+**Síntoma:** dificultad para cambiar el software, incluso de formas sencillas. Un cambio
 en una clase provoca cambios en muchas otras.
 
-**Ejemplo:** Una funcion con 6 niveles de `if/else` anidados.
+**Ejemplo:** una función con 6 niveles de `if/else` anidados.
 
-**Tecnicas:** Guard Clauses, Extract Method, Polymorphism.
+**Técnicas:** Guard Clauses, Extract Method, Polymorphism.
 
 ---
 
 ## 2. Fragilidad
 
-**Sintoma:** Tendencia a romperse en multiples lugares con un solo cambio. Logica copy-pasted
+**Síntoma:** tendencia a romperse en múltiples lugares con un solo cambio. Lógica copy-pasted
 que no se actualiza en todas partes.
 
-**Ejemplo:** Validaciones duplicadas en 4 endpoints distintos.
+**Ejemplo:** validaciones duplicadas en 4 endpoints distintos.
 
-**Tecnicas:** Extract Method, DRY, single source of truth.
+**Técnicas:** Extract Method, DRY, single source of truth.
 
 ---
 
 ## 3. Inmovilidad
 
-**Sintoma:** No puedes reutilizar componentes en otros proyectos porque dependen de detalles
+**Síntoma:** no puedes reutilizar componentes en otros proyectos porque dependen de detalles
 internos.
 
-**Tecnicas:** Dependency Injection, Extract Interface.
+**Técnicas:** Dependency Injection, Extract Interface.
 
 ---
 
 ## 4. Viscosidad
 
-**Sintoma:** Es mas facil hacer lo incorrecto que lo correcto. El "atajo malo" es mas comodo
+**Síntoma:** es más fácil hacer lo incorrecto que lo correcto. El "atajo malo" es más cómodo
 que el "camino limpio".
 
-**Tecnicas:** Refactor + utilidades comunes para que la cosa correcta sea trivial.
+**Técnicas:** refactor + utilidades comunes para que la opción correcta sea trivial.
 
 ---
 
-## 5. Codigo duplicado
+## 5. Código duplicado
 
-**Sintoma:** Mismo bloque (literal, semantico o por coincidencia) aparece en mas de un lugar.
+**Síntoma:** el mismo bloque (literal, semántico o por coincidencia) aparece en más de un lugar.
 
-**Ejemplo:** Tres funciones `validarNombre`, `validarEmail`, `validarEdad` con la misma
+**Ejemplo:** tres funciones `validarNombre`, `validarEmail`, `validarEdad` con la misma
 estructura `if(!x) errors.push(...)`.
 
-**Tecnica:** **Extract Method** + tabla de reglas / mapa de validadores.
+**Técnica:** **Extract Method** + tabla de reglas / mapa de validadores.
 
 ---
 
-## 6. Metodo largo
+## 6. Método largo
 
-**Sintoma:** Una funcion con mas de 15-20 lineas.
+**Síntoma:** una función con más de 15-20 líneas.
 
-**Ejemplo:** Funcion que valida, calcula, formatea y persiste en una sola pieza.
+**Ejemplo:** función que valida, calcula, formatea y persiste en una sola pieza.
 
-**Tecnica:** **Extract Method** (Compose Method). Una funcion = una idea.
+**Técnica:** **Extract Method** (Compose Method). Una función = una idea.
 
 ---
 
 ## 7. Clase grande / God function
 
-**Sintoma:** Una clase con > 200-300 lineas o > 10 metodos publicos. Hace demasiadas cosas.
+**Síntoma:** una clase con más de 200-300 líneas o más de 10 métodos públicos. Hace demasiadas cosas.
 
-**Tecnica:** **Extract Class**, separar por **SRP**.
+**Técnica:** **Extract Class**, separar por **SRP**.
 
 ---
 
-## 8. Lista larga de parametros
+## 8. Lista larga de parámetros
 
-**Sintoma:** Funcion que recibe mas de 3-4 parametros sueltos.
+**Síntoma:** función que recibe más de 3-4 parámetros sueltos.
 
 **Ejemplo:** `puedeAcceder(userId, role, banned, recursoId, ownerId, esPublic, ahora)`.
 
-**Tecnica:** **Introduce Parameter Object** -> `puedeAcceder(user, recurso)`.
+**Técnica:** **Introduce Parameter Object** → `puedeAcceder(user, recurso)`.
 
 ---
 
-## 9. Obsesion primitiva
+## 9. Obsesión primitiva
 
-**Sintoma:** Usar strings, ints o booleanos para representar conceptos de dominio
+**Síntoma:** usar strings, ints o booleanos para representar conceptos de dominio
 (emails, dinero, IDs, direcciones).
 
-**Ejemplo:** Pasar 7 strings sueltos por una direccion postal.
+**Ejemplo:** pasar 7 strings sueltos por una dirección postal.
 
-**Tecnica:** **Extract Class** (`Direccion`), Parameter Object, value objects.
+**Técnica:** **Extract Class** (`Direccion`), Parameter Object, value objects.
 
 ---
 
-## 10. Envidia de caracteristicas
+## 10. Envidia de características
 
-**Sintoma:** Un metodo esta mas interesado en los datos de otra clase que en los propios:
+**Síntoma:** un método está más interesado en los datos de otra clase que en los propios:
 hace muchos `otro.x`, `otro.y`, `otro.z`.
 
-**Tecnica:** **Move Method** a la clase correcta. "Tell, Don't Ask".
+**Técnica:** **Move Method** a la clase correcta. "Tell, Don't Ask".
 
 ---
 
 ## 11. Switch statements excesivos
 
-**Sintoma:** `switch(tipo)` con muchas ramas. Cada vez que agregas un tipo, tocas el
-switch (violacion **OCP**).
+**Síntoma:** `switch(tipo)` con muchas ramas. Cada vez que agregas un tipo, tocas el
+switch (violación de **OCP**).
 
 **Ejemplo:** `switch(tipoCliente) { case 'regular': ... case 'plata': ... }`.
 
-**Tecnica:** **Replace Conditional with Polymorphism** -> map de estrategias o subclases.
+**Técnica:** **Replace Conditional with Polymorphism** → mapa de estrategias o subclases.
 
 ---
 
-## Heuristicas rapidas
+## Heurísticas rápidas
 
-- **Regla del WTF:** si una linea te hace decir "wtf?", es un smell
-- **Regla de la linea vacia:** si necesitas separar codigo con lineas vacias dentro de una funcion, probablemente quieres Extract Method
-- **Regla del comentario:** si tienes que explicar algo con comentario, probablemente la funcion deberia llamarse asi
-- **Regla del pulgar:** si una funcion no cabe en tu pantalla sin scroll, es muy larga
-- **Regla del highlighter:** si dos bloques de codigo se ven identicos al destacarlos, son duplicacion
+- **Regla del WTF:** si una línea te hace decir "¿wtf?", es un smell.
+- **Regla de la línea vacía:** si necesitas separar código con líneas vacías dentro de una función, probablemente quieras Extract Method.
+- **Regla del comentario:** si tienes que explicar algo con un comentario, probablemente la función debería llamarse así.
+- **Regla del pulgar:** si una función no cabe en tu pantalla sin scroll, es muy larga.
+- **Regla del highlighter:** si dos bloques de código se ven idénticos al destacarlos, hay duplicación.

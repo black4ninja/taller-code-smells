@@ -1,10 +1,10 @@
 # Entregable — Refactor Race
 
-> Llena esta tabla durante el taller. Es parte de la calificacion.
+> Llena esta tabla durante el taller. Es parte de la calificación.
 
 **Participante:** _________________________
 
-**Matricula:** _________________________
+**Matrícula:** _________________________
 
 **Fecha:** _________________________
 
@@ -12,25 +12,25 @@
 
 ## Tabla por reto
 
-| Reto | Smell detectado | Tecnica aplicada | LOC antes / despues | Reflexion (1 linea) |
+| Reto | Smell detectado | Técnica aplicada | LOC antes / después | Reflexión (1 línea) |
 |------|------------------|--------------------|---------------------|----------------------|
-| C0 — Warm-up | Metodo largo + duplicacion | Extract Method (`precioConIva`) + ternario | 11 / 3 | El IVA condicional elimino las dos ramas simetricas. |
+| C0 — Warm-up | Método largo + duplicación | Extract Method (`precioConIva`) + ternario | 11 / 3 | El IVA condicional eliminó las dos ramas simétricas. |
 | C1 — Descuento |   |   |   |   |
 | C2 — Acceso usuario |   |   |   |   |
-| C3 — Direccion |   |   |   |   |
+| C3 — Dirección |   |   |   |   |
 | C4 — Factura |   |   |   |   |
 | C5 — Validador |   |   |   |   |
 | C6 — Reporte |   |   |   |   |
 
 ---
 
-## Reflexion final (3-5 lineas)
+## Reflexión final (3-5 líneas)
 
-> Cual fue el smell que te costo mas reconocer? Que tecnica te resulto mas util?
-> Que cambiarias de tu forma de codificar despues de este taller?
+> ¿Cuál fue el smell que te costó más reconocer? ¿Qué técnica te resultó más útil?
+> ¿Qué cambiarías de tu forma de codificar después de este taller?
 
 ```
-[tu respuesta aqui]
+[tu respuesta aquí]
 ```
 
 ---
@@ -38,14 +38,14 @@
 ## Estado final (al cierre del race)
 
 - Retos en verde: ___ / 7
-- Tiempo total registrado en /leaderboard: ___ min
+- Tiempo total registrado en `/leaderboard`: ___ min
 - Captura de pantalla del leaderboard pegada al final: [ ]
 
 ---
 
-## Reglas de evaluacion (para tu referencia)
+## Reglas de evaluación (para tu referencia)
 
-- 60% retos en verde (cada uno vale ~8.5%)
-- 20% calidad del entregable (smell + tecnica correctamente identificados)
-- 10% reflexion final
-- 10% tiempo / orden de finalizacion (top 3 obtienen bono)
+- 60 % retos en verde (cada uno vale ~8.5 %)
+- 20 % calidad del entregable (smell y técnica correctamente identificados)
+- 10 % reflexión final
+- 10 % tiempo y orden de finalización (top 3 obtienen bono)

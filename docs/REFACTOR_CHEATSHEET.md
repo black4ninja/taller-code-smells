@@ -1,12 +1,12 @@
-# Refactor Cheatsheet — 9 tecnicas con plantillas antes/despues
+# Refactor Cheatsheet — 9 técnicas con plantillas antes/después
 
-> Reglas de oro: nunca refactorices sin tests · cambios pequenos · commit despues de cada uno · separa refactor de features.
+> Reglas de oro: nunca refactorices sin tests · cambios pequeños · commit después de cada uno · separa refactor de features.
 
 ---
 
 ## Extract Method
 
-Saca un bloque cohesivo a una funcion con nombre.
+Saca un bloque cohesivo a una función con nombre.
 
 **Antes:**
 ```js
@@ -20,7 +20,7 @@ function imprimirReporte(ventas) {
 }
 ```
 
-**Despues:**
+**Después:**
 ```js
 function calcularSubtotal(ventas) {
   return ventas.reduce((s, v) => s + v.precio * v.cantidad, 0);
@@ -37,7 +37,7 @@ function imprimirReporte(ventas) {
 
 ## Replace Conditional with Polymorphism
 
-Mata el `switch` con un map / strategy.
+Mata el `switch` con un mapa o strategy.
 
 **Antes:**
 ```js
@@ -52,7 +52,7 @@ function calcularDescuento(tipo, monto) {
 }
 ```
 
-**Despues:**
+**Después:**
 ```js
 const TASAS = { regular: 0, plata: 0.05, oro: 0.10, diamante: 0.15 };
 
@@ -67,14 +67,14 @@ function calcularDescuento(tipo, monto) {
 
 ## Introduce Parameter Object
 
-Agrupa parametros relacionados en un objeto.
+Agrupa parámetros relacionados en un objeto.
 
 **Antes:**
 ```js
 function puedeAcceder(userId, role, banned, recursoId, ownerId, esPublic, ahora) { ... }
 ```
 
-**Despues:**
+**Después:**
 ```js
 function puedeAcceder(user, recurso) {
   if (user.banned) return false;
@@ -88,7 +88,7 @@ function puedeAcceder(user, recurso) {
 
 ## Extract Class
 
-Saca campos y metodos relacionados a una clase nueva (o value object).
+Saca campos y métodos relacionados a una clase nueva (o value object).
 
 **Antes:**
 ```js
@@ -100,7 +100,7 @@ function formatear(calle, numero, colonia, ciudad, estado, cp, pais) {
 }
 ```
 
-**Despues:**
+**Después:**
 ```js
 function formatearDireccion(dir) {
   return [
@@ -116,10 +116,10 @@ function formatearDireccion(dir) {
 
 ## Move Method
 
-Si un metodo usa mas datos de otra clase que de la propia, **mueve el metodo** a esa clase.
+Si un método usa más datos de otra clase que de la propia, **muévelo** a esa clase.
 
 **Antes:** `Cuenta.calcularInteres(otraCuenta)` que solo lee de `otraCuenta`.
-**Despues:** `OtraCuenta.calcularInteres()`.
+**Después:** `OtraCuenta.calcularInteres()`.
 
 ---
 
@@ -140,7 +140,7 @@ function f(x) {
 }
 ```
 
-**Despues:**
+**Después:**
 ```js
 function f(x) {
   if (!x.valido) return false;
@@ -153,11 +153,11 @@ function f(x) {
 
 ## Compose Method
 
-Una funcion de alto nivel solo orquesta llamadas a otras funciones (no calcula).
+Una función de alto nivel solo orquesta llamadas a otras funciones (no calcula).
 
-**Antes:** 50 lineas mezclando subtotal, IVA, descuento, formato.
+**Antes:** 50 líneas mezclando subtotal, IVA, descuento y formato.
 
-**Despues:**
+**Después:**
 ```js
 function resumenFactura(f) {
   const subtotal = calcSubtotal(f.items);
@@ -177,14 +177,14 @@ function resumenFactura(f) {
 
 En vez de `if (x === null) ...` en todas partes, usa un objeto "nulo" con defaults.
 
-**Antes:** `const total = (user && user.descuento) || 0`
-**Despues:** `function getUser(id) { return DB.find(id) || { descuento: 0 } }`
+**Antes:** `const total = (user && user.descuento) || 0;`
+**Después:** `function getUser(id) { return DB.find(id) || { descuento: 0 }; }`
 
 ---
 
 ## Dependency Injection
 
-En vez de instanciar dependencias adentro, recibelas por parametro/constructor.
+En vez de instanciar dependencias adentro, recíbelas por parámetro o constructor.
 
 **Antes:**
 ```js
@@ -194,7 +194,7 @@ function sendNotification(msg) {
 }
 ```
 
-**Despues:**
+**Después:**
 ```js
 function sendNotification(msg, notifier) {
   notifier.send(msg);
@@ -203,16 +203,16 @@ function sendNotification(msg, notifier) {
 
 ---
 
-## Cuando usar cada una (decision rapida)
+## Cuándo usar cada una (decisión rápida)
 
-| Sintoma | Tecnica |
+| Síntoma | Técnica |
 |---------|---------|
-| funcion larga | Extract Method |
-| switch(tipo) | Replace Conditional with Polymorphism |
-| 5+ parametros | Introduce Parameter Object |
+| función larga | Extract Method |
+| `switch(tipo)` | Replace Conditional with Polymorphism |
+| 5+ parámetros | Introduce Parameter Object |
 | muchos strings primitivos del mismo concepto | Extract Class / Parameter Object |
-| ifs anidados | Guard Clauses |
-| codigo casi identico en 2+ lugares | Extract Method + DRY |
-| metodo lee mas de otra clase | Move Method |
+| `if`s anidados | Guard Clauses |
+| código casi idéntico en 2+ lugares | Extract Method + DRY |
+| método lee más datos de otra clase | Move Method |
 | `if (x === null)` repetido | Introduce Null Object |
-| hard-coded new ServiceX() | Dependency Injection |
+| `new ServiceX()` hard-coded | Dependency Injection |

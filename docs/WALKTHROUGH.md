@@ -1,6 +1,6 @@
 # Walkthrough — C0 resuelto paso a paso
 
-> C0 es el ejemplo guiado. Sigues estos 8 pasos y repites el patron en C1..C6.
+> C0 es el ejemplo guiado. Sigues estos 8 pasos y repites el patrón en C1..C6.
 
 ---
 
@@ -10,10 +10,10 @@ Abre `tests/refactor/C0_warmup.test.js`. Te pide:
 
 - `totalCarrito([]) === 0`
 - Aplicar IVA 16% a items con `esEnvio = false`
-- Envio NO lleva IVA
-- **Quality:** `totalCarrito` <= 8 LOC, complejidad <= 3, profundidad <= 2, sin `switch`
+- Los envíos NO llevan IVA
+- **Quality:** `totalCarrito` ≤ 8 LOC, complejidad ≤ 3, profundidad ≤ 2, sin `switch`
 
-## Paso 2 — Escribe la version junior (la primera que se te ocurra)
+## Paso 2 — Escribe la versión junior (la primera que se te ocurra)
 
 Abre `src/challenges/c0_warmup_total.js` y escribe:
 
@@ -47,19 +47,19 @@ Resultado esperado:
 - Correctitud: 6/6 PASA
 - Quality: falla `totalCarrito no excede 8 lineas` con mensaje:
 
-  > La funcion "totalCarrito" tiene 11 lineas (limite: 8).
-  > Smell: **Metodo largo**.
-  > Tecnica sugerida: **Extract Method**.
+  > La función "totalCarrito" tiene 11 líneas (límite: 8).
+  > Smell: **Método largo**.
+  > Técnica sugerida: **Extract Method**.
 
 ## Paso 4 — Identifica el smell
 
-El test mismo te dice el smell. Mira tu codigo: `precio * cantidad` aparece **dos veces**.
-Las dos ramas del `if/else` son **simetricas** (envio = base, no envio = base * 1.16).
+El test mismo te dice el smell. Mira tu código: `precio * cantidad` aparece **dos veces**.
+Las dos ramas del `if/else` son **simétricas** (envío = base; no envío = base × 1.16).
 
-## Paso 5 — Elige la tecnica
+## Paso 5 — Elige la técnica
 
-- "Metodo largo" + duplicacion -> **Extract Method**
-- Rama simetrica -> simplificar con **operador ternario**
+- "Método largo" + duplicación → **Extract Method**
+- Rama simétrica → simplificar con **operador ternario**
 
 ## Paso 6 — Refactoriza
 
@@ -84,26 +84,26 @@ module.exports = { totalCarrito };
 npm run test:c0
 ```
 
-Ahora `totalCarrito` tiene 3 lineas. Quality verde. Correctitud verde.
+Ahora `totalCarrito` tiene 3 líneas. Quality verde. Correctitud verde.
 
 ## Paso 8 — Documenta tu refactor
 
 Abre `docs/ENTREGABLE.md` y llena la fila de C0:
 
-| Reto | Smell | Tecnica | LOC antes/despues | Reflexion |
-|------|-------|---------|--------------------|-----------|
-| C0 | Metodo largo + duplicacion de calculo | Extract Method (`precioConIva`) + ternario | 11 / 3 | El IVA condicional reemplazo dos ramas simetricas. |
+| Reto | Smell | Técnica | LOC antes / después | Reflexión |
+|------|-------|---------|---------------------|-----------|
+| C0 | Método largo + duplicación de cálculo | Extract Method (`precioConIva`) + ternario | 11 / 3 | El IVA condicional reemplazó las dos ramas simétricas. |
 
 ---
 
 ## Checklist mental para C1..C6
 
-- [ ] Lei el test y entiendo que pide (correctitud + quality)
-- [ ] Implemente la version junior (la primera que se me ocurrio)
+- [ ] Leí el test y entiendo qué pide (correctitud + quality)
+- [ ] Implementé la versión junior (la primera que se me ocurrió)
 - [ ] Vi el rojo y el mensaje del test me dijo el smell
-- [ ] Eli una **sola** tecnica de refactor
-- [ ] La apliqe, todos los tests verdes
-- [ ] Llene mi fila en `ENTREGABLE.md`
+- [ ] Elegí **una sola** técnica de refactor
+- [ ] La apliqué; todos los tests están verdes
+- [ ] Llené mi fila en `ENTREGABLE.md`
 
-> Si te atascas mas de 10 minutos en un reto: relee este walkthrough y aplica el loop.
-> Los smells cambian, el metodo no.
+> Si te atascas más de 10 minutos en un reto, relee este walkthrough y aplica el loop.
+> Los smells cambian; el método no.
