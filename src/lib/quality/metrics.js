@@ -107,6 +107,14 @@ function analyzeFunctionBody(path) {
   return { complexity, maxDepth, switchCount, ifCount, stringConcatAssign };
 }
 
+function isObjectLiteralValue(path) {
+  const parent = path.parent;
+  if (!parent) return false;
+  if (parent.type !== 'Property' && parent.type !== 'ObjectProperty') return false;
+  if (parent.shorthand || parent.method) return false;
+  return parent.value === path.node;
+}
+
 function functionName(path) {
   const node = path.node;
   if (node.id && node.id.name) return node.id.name;
@@ -150,6 +158,7 @@ function analyze(filePath) {
         switchCount: metrics.switchCount,
         ifCount: metrics.ifCount,
         stringConcatAssign: metrics.stringConcatAssign,
+        isObjectValue: isObjectLiteralValue(path),
         startLine: path.node.loc ? path.node.loc.start.line : 0,
         endLine: path.node.loc ? path.node.loc.end.line : 0,
       });

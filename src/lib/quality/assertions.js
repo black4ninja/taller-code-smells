@@ -155,17 +155,26 @@ function expectMaxIfCount(filePath, fnName, max) {
 function expectFunctionCount(filePath, opts = {}) {
   const report = analyze(filePath);
   const { min, max } = opts;
-  if (typeof min === 'number' && report.functionCount < min) {
+  // Por default, las arrow functions usadas como valor en un object literal
+  // (ej. `{ string: (v) => v.length }`) NO cuentan: son estrategias dentro de
+  // una tabla de reglas, no unidades de logica reutilizables. Pasar
+  // includeObjectValues: true para contar tambien esas.
+  const includeObjectValues = opts.includeObjectValues === true;
+  const counted = includeObjectValues
+    ? report.functions
+    : report.functions.filter((f) => !f.isObjectValue);
+  const count = counted.length;
+  if (typeof min === 'number' && count < min) {
     fail(
       'godFunction',
-      `El archivo define ${report.functionCount} funciones (minimo esperado: ${min}). ` +
+      `El archivo define ${count} funciones (minimo esperado: ${min}). ` +
         `Divide la responsabilidad en mas funciones.`
     );
   }
-  if (typeof max === 'number' && report.functionCount > max) {
+  if (typeof max === 'number' && count > max) {
     fail(
       'duplication',
-      `El archivo define ${report.functionCount} funciones (maximo esperado: ${max}). ` +
+      `El archivo define ${count} funciones (maximo esperado: ${max}). ` +
         `Probablemente hay duplicacion: factoriza en una funcion generica.`
     );
   }

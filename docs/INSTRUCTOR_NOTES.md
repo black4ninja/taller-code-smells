@@ -73,6 +73,12 @@ Ver el branch `solution` para las implementaciones limpias. Resumen:
 - **C5** ~10 LOC en `validar` con un mapa `{ string: fn, number: fn, boolean: fn }`.
 - **C6** ~5 LOC en `generarReporte` + 4 formatters cortos.
 
+### Nota sobre C5 y el quality gate `expectFunctionCount`
+
+El detector ignora por default las arrow functions usadas como **valor de propiedad de un object literal** (ej. `{ string: (v) => v.length }`). Esto es deliberado: las estrategias dentro de una tabla de reglas son datos, no unidades de logica reutilizables. Asi, la solucion idiomatica de C5 (un mapa de estrategias por tipo con arrows) cumple el limite de `max: 3` funciones aunque tenga 3-4 arrows en el mapa.
+
+Si en algun futuro reto quieres que SI cuenten, pasa `includeObjectValues: true` al asserter.
+
 ---
 
 ## Troubleshooting

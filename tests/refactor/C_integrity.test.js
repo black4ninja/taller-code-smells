@@ -15,8 +15,8 @@ const EXPECTED = {
   "tests/refactor/C6_report_builder.test.js": "c224d0dcee84bf9bf625b9dd6985966904b57ed76ef57f765c0dd03db5b05572",
   "tests/refactor/helpers.js": "1f3d57eb9f2b112494e674804cae832e39cda927b712049c1c57a3b11ac4fa6b",
   "src/lib/quality/analyzeFile.js": "7b211cc4d18b5bf2e817f875271436177fd2fb7ec71a59b56f90b8cc3b15346c",
-  "src/lib/quality/metrics.js": "fe04b56893a65ea7fc43e249deb80f10c09a0548b49cdea061e0cee291cfdd0c",
-  "src/lib/quality/assertions.js": "58e23f85b38ec84bb9394508ca63aa21564c68500e3d2152e2c78640870f5e79",
+  "src/lib/quality/metrics.js": "997048fdb2288aa54091b15b45ae1f3221c64279d60148a46a4fb067936d7f5b",
+  "src/lib/quality/assertions.js": "66092b851549cfb577b52d55c4b84c951b71934e16063ccf7d0d591111b06f65",
   "src/lib/quality/duplicateScan.js": "98acdbb3f2c68397010085b948fe1ceb7b2f86aa721a24e6da730cb2690ab160"
 };
 // LOCKED_HASHES_END
