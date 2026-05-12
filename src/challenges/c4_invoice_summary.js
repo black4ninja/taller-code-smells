@@ -24,7 +24,7 @@
 //   - el archivo define AL MENOS 3 funciones (SRP)
 //   - sin duplicacion (jscpd / detector simple)
 //
-// Hint pedagogico: el junior hace TODO en una funcion de 50 lineas.
+// Hint pedagogico: la primera version mete TODO en una funcion de 50 lineas.
 // El refactor limpio extrae helpers (calcSubtotal, calcImpuestos, etc.)
 // y REUSA C1 y C3 via require.
 // =============================================================

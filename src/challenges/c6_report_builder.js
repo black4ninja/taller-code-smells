@@ -24,7 +24,7 @@
 //   - TODA funcion del archivo <= 15 lineas
 //   - sin duplicacion entre formatters
 //
-// Hint pedagogico: el junior hace switch(tipo) con 4 ramas inline.
+// Hint pedagogico: la primera version suele hacer switch(tipo) con 4 ramas inline.
 // El refactor con Strategy es:
 //   const FORMATTERS = { json: fmtJson, csv: fmtCsv, ... };
 //   const fmt = FORMATTERS[tipo] || throw...

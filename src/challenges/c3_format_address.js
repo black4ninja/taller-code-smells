@@ -17,7 +17,7 @@
 //   - maximo 2 "if"
 //   - PROHIBIDO usar "+=" para concatenar strings
 //
-// Hint pedagogico: el junior recibe 7 strings primitivos y concatena con
+// Hint pedagogico: la primera version recibe 7 strings primitivos y concatena con
 // result += ... if(...). El refactor limpio agrupa con filter(Boolean).join().
 // =============================================================
 

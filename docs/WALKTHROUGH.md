@@ -13,7 +13,7 @@ Abre `tests/refactor/C0_warmup.test.js`. Te pide:
 - Los envíos NO llevan IVA
 - **Quality:** `totalCarrito` ≤ 8 LOC, complejidad ≤ 3, profundidad ≤ 2, sin `switch`
 
-## Paso 2 — Escribe la versión junior (la primera que se te ocurra)
+## Paso 2 — Escribe la primera versión (la que se te ocurra de inmediato)
 
 Abre `src/challenges/c0_warmup_total.js` y escribe:
 
@@ -99,7 +99,7 @@ Abre `docs/ENTREGABLE.md` y llena la fila de C0:
 ## Checklist mental para C1..C6
 
 - [ ] Leí el test y entiendo qué pide (correctitud + quality)
-- [ ] Implementé la versión junior (la primera que se me ocurrió)
+- [ ] Implementé la primera versión (la que se me ocurrió de inmediato)
 - [ ] Vi el rojo y el mensaje del test me dijo el smell
 - [ ] Elegí **una sola** técnica de refactor
 - [ ] La apliqué; todos los tests están verdes

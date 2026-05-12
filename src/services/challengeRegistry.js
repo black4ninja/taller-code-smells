@@ -9,7 +9,7 @@ const CHALLENGES = [
     testPattern: 'tests/refactor/C0',
     tiempoMin: 10,
     descripcion: 'Implementa totalCarrito(items). Aplica IVA 16% a productos no-envio. ' +
-      'El junior repite precio*cantidad en dos ramas; el test te empuja a Extract Method.',
+      'La primera version suele repetir precio*cantidad en dos ramas; el test te empuja a Extract Method.',
     restricciones: [
       'totalCarrito <= 8 lineas',
       'complejidad ciclomatica <= 3',
@@ -44,7 +44,7 @@ const CHALLENGES = [
     archivo: 'src/challenges/c2_user_role_access.js',
     testPattern: 'tests/refactor/C2',
     tiempoMin: 13,
-    descripcion: 'Implementa puedeAcceder(user, recurso). Agrupa los 7 parametros primitivos del junior ' +
+    descripcion: 'Implementa puedeAcceder(user, recurso). Agrupa los 7 parametros primitivos sueltos ' +
       'en dos objetos y usa early returns.',
     restricciones: [
       'exactamente 2 parametros',

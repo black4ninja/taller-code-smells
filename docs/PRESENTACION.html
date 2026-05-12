@@ -106,7 +106,7 @@
       <li>uso de <code>switch</code>, <code>if</code>, <code>+=</code> sobre strings</li>
       <li>duplicación</li>
     </ul>
-    <p style="margin-top: 18px;" class="accent">El junior que llevas dentro hoy va a sufrir. Y a aprender.</p>
+    <p style="margin-top: 18px;" class="accent">Tu primer instinto al codificar hoy va a sufrir. Y a aprender.</p>
   </section>
 
   <!-- Slide 3: Definición -->
@@ -146,7 +146,7 @@
     <p>Reto <code>C1</code>. Cada vez que agregas un tipo, tocas la función. Viola <strong>OCP</strong>.</p>
     <div class="columns">
       <div>
-        <span class="pre-label bad">junior</span>
+        <span class="pre-label bad">antes</span>
 <pre class="bad">function descuento(tipo, monto) {
   switch (tipo) {
     case 'regular': return 0;
@@ -159,7 +159,7 @@
 }</pre>
       </div>
       <div>
-        <span class="pre-label good">refactor</span>
+        <span class="pre-label good">después</span>
 <pre class="good">const TASAS = {
   regular: 0, plata: 0.05, oro: 0.10,
   diamante: 0.15, empleado: 0.25
@@ -181,7 +181,7 @@ function descuento(tipo, monto) {
     <p>Reto <code>C2</code>. Acompañado de anidamiento profundo (Rigidez).</p>
     <div class="columns">
       <div>
-        <span class="pre-label bad">junior</span>
+        <span class="pre-label bad">antes</span>
 <pre class="bad">function puedeAcceder(
   userId, role, banned,
   recursoId, ownerId,
@@ -197,7 +197,7 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
       <div>
-        <span class="pre-label good">refactor</span>
+        <span class="pre-label good">después</span>
 <pre class="good">function puedeAcceder(user, recurso) {
   if (user.banned) return false;
   if (user.role === 'admin') return true;
@@ -215,7 +215,7 @@ function descuento(tipo, monto) {
     <p>Reto <code>C3</code>. Strings sueltos para algo que es un concepto del dominio.</p>
     <div class="columns">
       <div>
-        <span class="pre-label bad">junior</span>
+        <span class="pre-label bad">antes</span>
 <pre class="bad">function formatear(
   calle, numero, colonia,
   ciudad, estado, cp, pais
@@ -229,7 +229,7 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
       <div>
-        <span class="pre-label good">refactor</span>
+        <span class="pre-label good">después</span>
 <pre class="good">function formatearDireccion(dir) {
   return [
     [dir.calle, dir.numero]
@@ -251,7 +251,7 @@ function descuento(tipo, monto) {
     <p>Retos <code>C0</code> y <code>C4</code>. Una función que hace 5 cosas tiene 5 razones para cambiar.</p>
     <div class="columns">
       <div>
-        <span class="pre-label bad">junior</span>
+        <span class="pre-label bad">antes</span>
 <pre class="bad">function total(items) {
   let s = 0;
   for (const it of items) {
@@ -267,7 +267,7 @@ function descuento(tipo, monto) {
 }</pre>
       </div>
       <div>
-        <span class="pre-label good">refactor</span>
+        <span class="pre-label good">después</span>
 <pre class="good">const IVA = 0.16;
 
 function precioConIva(it) {
@@ -332,7 +332,7 @@ function total(items) {
     <ol>
       <li>Abre <code>tests/refactor/CN_*.test.js</code> &mdash; lee qué pide</li>
       <li>Abre <code>src/challenges/cN_*.js</code> &mdash; <span class="accent">aquí escribes</span></li>
-      <li>Escribe la versión <strong>junior</strong>: lo primero que se te ocurra</li>
+      <li>Escribe la <strong>primera versión</strong>: lo primero que se te ocurra</li>
       <li>Corre <code>npm run test:cN</code> &mdash; verás rojo</li>
       <li>El mensaje del test te <strong>nombra el smell</strong> y sugiere la <strong>técnica</strong>:</li>
     </ol>

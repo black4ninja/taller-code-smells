@@ -21,7 +21,7 @@
 //   - calcularDescuento <= 10 lineas
 //   - complejidad ciclomatica <= 3
 //
-// Hint pedagogico: el junior siempre intenta switch o if/else if encadenado.
+// Hint pedagogico: la primera version casi siempre intenta switch o if/else if encadenado.
 // El refactor limpio es un MAP de tasas y un lookup.
 // =============================================================
 

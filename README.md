@@ -2,7 +2,7 @@
 
 > Implementa 7 funciones desde cero. Los tests no solo validan que **funcionen**: también
 > miden líneas, complejidad, anidamiento, switches y duplicación. Tu misión: pasar los
-> 7 retos en 1h 40min con código limpio. El junior que llevas dentro hoy va a sufrir y a aprender.
+> 7 retos en 1h 40min con código limpio. Tu primer instinto al codificar hoy va a sufrir y a aprender.
 
 ---
 
@@ -44,7 +44,7 @@ Abre [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md). C0 está resuelto paso a paso
 el loop completo:
 
 ```
-implementación junior  ->  tests rojos  ->  identificar smell  ->
+primera versión  ->  tests rojos  ->  identificar smell  ->
    aplicar técnica  ->  tests verdes  ->  documentar en ENTREGABLE
 ```
 

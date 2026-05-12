@@ -20,7 +20,7 @@
 //   - <= 12 lineas
 //   - complejidad ciclomatica <= 5
 //
-// Hint pedagogico: el junior recibe 7 parametros sueltos y anida ifs.
+// Hint pedagogico: la primera version recibe 7 parametros sueltos y anida ifs.
 // El refactor limpio agrupa en objetos user/recurso y usa early returns.
 // =============================================================
 

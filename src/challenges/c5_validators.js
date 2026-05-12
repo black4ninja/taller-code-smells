@@ -24,7 +24,7 @@
 //   - validar tiene complejidad ciclomatica <= 6
 //   - Sin duplicacion entre fragmentos
 //
-// Hint pedagogico: el junior hace validarNombre, validarEmail, validarEdad...
+// Hint pedagogico: una primera version suele escribir validarNombre, validarEmail, validarEdad...
 // El refactor DRY itera el esquema con un mapa de validadores por tipo.
 // =============================================================
 
