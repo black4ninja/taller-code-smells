@@ -23,11 +23,10 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "express": "^4.21.0",
-    "express-session": "^1.18.0",
-    "ejs": "^3.1.10",
     "@babel/parser": "^7.24.0",
     "@babel/traverse": "^7.24.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
     "jscpd": "^4.0.5"
   },
   "devDependencies": {

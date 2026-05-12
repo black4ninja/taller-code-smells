@@ -16,7 +16,7 @@ Guía operativa del taller. **No compartir con alumnos.**
 | 65-80 min | Trabajo C3 (~13 min) |
 | 80-95 min | Trabajo C4 (~13 min) |
 | 95-110 min | Trabajo C5 (~13 min) |
-| 110-120 min | Trabajo C6 (~10 min) + cierre: leaderboard y reflexión |
+| 110-120 min | Trabajo C6 (~10 min) + cierre: cada alumno corre "Correr toda la suite" y comparte su pantalla |
 
 > Si necesitas apretar a 1h 40min, salta el bloque de setup (que cada alumno lo haga antes de llegar) y comienza con presentación + walkthrough C0 = 25 min, dejando 75 min para los 6 retos (~12 min c/u).
 
@@ -43,10 +43,7 @@ Guía operativa del taller. **No compartir con alumnos.**
   ssh alumno@maquina  # o pídele que comparta pantalla
   npm test 2>&1 | grep -E '(PASS|FAIL)'
   ```
-- **Validar entrega final:**
-  ```bash
-  cat data/leaderboard.json | jq .
-  ```
+- **Validar entrega final:** pide al alumno que pulse "Correr toda la suite" en el dashboard, o `npm test` en su terminal. Cuenta cuántos retos quedan en verde.
 - **Detectar trampa (alumno modificó tests o quality lib):**
   ```bash
   npm test 2>&1 | grep -i integridad
@@ -101,7 +98,7 @@ Recibe del alumno:
 
 1. URL del repo o fork con su trabajo
 2. `docs/ENTREGABLE.md` lleno
-3. Captura del leaderboard mostrando su posición
+3. Captura del dashboard con "Correr toda la suite" en verde (o salida de `npm test`)
 
 Corre en su clon:
 
@@ -118,4 +115,3 @@ Verifica integridad: si `C_integrity.test.js` falla, el alumno hizo trampa y se 
 ## Después del taller
 
 - Empuja la branch `solution` al remoto para que los alumnos puedan revisarla.
-- Comparte el ranking final con la clase.

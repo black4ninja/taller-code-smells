@@ -38,14 +38,12 @@
 ## Estado final (al cierre del race)
 
 - Retos en verde: ___ / 7
-- Tiempo total registrado en `/leaderboard`: ___ min
-- Captura de pantalla del leaderboard pegada al final: [ ]
+- Captura de pantalla del dashboard mostrando "Correr toda la suite" en verde: [ ]
 
 ---
 
 ## Reglas de evaluación (para tu referencia)
 
-- 60 % retos en verde (cada uno vale ~8.5 %)
+- 70 % retos en verde (cada uno vale 10 %)
 - 20 % calidad del entregable (smell y técnica correctamente identificados)
 - 10 % reflexión final
-- 10 % tiempo y orden de finalización (top 3 obtienen bono)

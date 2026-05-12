@@ -1,13 +1,11 @@
 <article class="card" data-challenge="<%= c.id %>">
   <header class="card-head">
     <span class="card-id"><%= c.id %></span>
-    <span class="card-status <%= status && status[c.id] && status[c.id].verde ? 'ok' : (status && status[c.id] ? 'fail' : 'pending') %>">
-      <% if (status && status[c.id] && status[c.id].verde) { %>VERDE<% } else if (status && status[c.id]) { %><%= status[c.id].passed %>/<%= status[c.id].total %><% } else { %>pendiente<% } %>
-    </span>
+    <span class="card-status pending">pendiente</span>
   </header>
   <h3><a href="/challenge/<%= c.id %>"><%= c.titulo %></a></h3>
   <p class="smell"><strong>Smell:</strong> <%= c.smell %></p>
-  <p class="tecnica"><strong>Tecnica:</strong> <%= c.tecnica %></p>
+  <p class="tecnica"><strong>Técnica:</strong> <%= c.tecnica %></p>
   <p class="archivo"><code><%= c.archivo %></code></p>
   <button class="btn btn-run" data-id="<%= c.id %>" data-pattern="tests/refactor/<%= c.id %>">Correr tests</button>
   <pre class="card-output" id="out-<%= c.id %>"></pre>

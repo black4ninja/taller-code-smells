@@ -40,7 +40,42 @@ code {
   font-size: 13px;
 }
 
-.intro { margin-bottom: 32px; }
+.intro { margin-bottom: 24px; }
+
+.global-actions {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.global-actions > .btn-run-all {
+  align-self: flex-start;
+  background: #238636;
+  border-color: #238636;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+.global-actions > .btn-run-all:hover:not(:disabled) { background: #2ea043; }
+.global-actions > .btn-run-all:disabled { opacity: 0.7; cursor: wait; }
+.global-output {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 12px;
+  margin: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  display: none;
+  font-family: inherit;
+  color: #c9d1d9;
+}
+.global-output.visible { display: block; }
 .warn { color: #d29922; }
 .ok { color: #3fb950; }
 .fail { color: #f85149; }

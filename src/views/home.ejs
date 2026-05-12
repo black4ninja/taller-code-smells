@@ -5,32 +5,27 @@
 
 <section class="intro">
   <h1>Refactor Race</h1>
-  <p>Implementa 7 funciones. Los tests no solo validan que funcionen: tambien miden lineas,
-  complejidad, anidamiento, switches y duplicacion. Pasa los 7 con codigo limpio.</p>
-  <% if (submitter) { %>
-    <p><strong>Participante:</strong> <%= submitter.nombre %> <% if (submitter.matricula) { %>(<%= submitter.matricula %>)<% } %></p>
-  <% } else { %>
-    <p class="warn">No te has registrado todavia. <a href="/submit">Registrate aqui</a> para aparecer en el leaderboard.</p>
-  <% } %>
+  <p>Implementa 7 funciones. Los tests no solo validan que funcionen: también miden líneas,
+  complejidad, anidamiento, switches y duplicación. Pasa los 7 con código limpio.</p>
   <p>
-    <strong>Como empezar:</strong>
+    <strong>Cómo empezar:</strong>
     1) Lee <code>docs/WALKTHROUGH.md</code> para ver C0 resuelto paso a paso.
-    2) Abre <code>src/challenges/c0_warmup_total.js</code> y editalo.
-    3) Corre <code>npm run test:c0</code> (o pulsa "Correr tests" abajo).
-    4) Cuando este verde, sigue con C1.
+    2) Abre <code>src/challenges/c0_warmup_total.js</code> y edítalo.
+    3) Corre <code>npm run test:c0</code> (o pulsa "Correr tests" en su tarjeta).
+    4) Cuando esté verde, sigue con C1.
   </p>
+</section>
+
+<section class="global-actions">
+  <button class="btn btn-run-all" id="btn-run-all">Correr toda la suite</button>
+  <span class="small">Equivale a <code>npm test</code> — útil al final para verificar que todo sigue verde.</span>
+  <pre class="global-output" id="global-output"></pre>
 </section>
 
 <section class="grid">
   <% challenges.forEach(function(c) { %>
-    <%- include('partials/challenge_card', { c: c, status: status }) %>
+    <%- include('partials/challenge_card', { c: c, status: {} }) %>
   <% }) %>
-</section>
-
-<section class="actions">
-  <form method="POST" action="/finalize" onsubmit="return confirm('Finalizar y registrar tu tiempo total?');">
-    <button class="btn btn-finalize" type="submit">Marcar fin (registrar tiempo)</button>
-  </form>
 </section>
 
 <%- include('partials/end') %>

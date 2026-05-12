@@ -62,15 +62,33 @@ function summarize(jestJson) {
   const passed = jestJson.numPassedTests || 0;
   const failed = jestJson.numFailedTests || 0;
   const fails = [];
+  const byFile = [];
   for (const tr of jestJson.testResults || []) {
-    for (const t of tr.testResults || []) {
+    const file = (tr.testFilePath || tr.name || '').split('/').pop();
+    const idMatch = file.match(/^(C\d+|C_[A-Za-z]+)/);
+    const id = idMatch ? idMatch[1] : file;
+    const inner = tr.testResults || tr.assertionResults || [];
+    let filePassed = 0;
+    let fileFailed = 0;
+    for (const t of inner) {
       if (t.status === 'failed') {
+        fileFailed += 1;
         fails.push({
+          archivo: id,
           titulo: t.fullName || t.title,
           mensaje: (t.failureMessages || []).join('\n').split('\n').slice(0, 6).join('\n'),
         });
+      } else if (t.status === 'passed') {
+        filePassed += 1;
       }
     }
+    // Algunas versiones de jest reportan totales agregados por archivo
+    if (filePassed === 0 && fileFailed === 0) {
+      filePassed = tr.numPassingTests || 0;
+      fileFailed = tr.numFailingTests || 0;
+    }
+    const verde = fileFailed === 0 && (filePassed > 0 || (tr.status === 'passed'));
+    byFile.push({ id, passed: filePassed, failed: fileFailed, verde });
   }
   return {
     total,
@@ -78,6 +96,7 @@ function summarize(jestJson) {
     failed,
     success: jestJson.success,
     fails,
+    byFile,
   };
 }
 

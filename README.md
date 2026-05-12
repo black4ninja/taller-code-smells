@@ -10,7 +10,7 @@
 
 1. **Individual.** Clonas el repo y trabajas en tu copia local.
 2. **1h 40min** desde el banderazo. C0 es warm-up guiado los primeros 10 minutos.
-3. Gana quien tenga **más retos en verde**; desempate por tiempo total.
+3. Gana quien tenga **más retos en verde**.
 4. Valida con `npm test` o desde el dashboard web (`npm start`).
 5. **NO edites** archivos en `tests/refactor/` ni en `src/lib/quality/`. Hay un test de integridad que lo detecta.
 6. Entregable paralelo: llena `docs/ENTREGABLE.md` con smell, técnica y reflexión por reto.
@@ -89,13 +89,10 @@ Cuando un quality gate falla, el mensaje **nombra el smell** y sugiere la **téc
 
 `npm start` abre http://localhost:3000:
 
-- **`/`** — grid de retos con badge pass/fail y botón "Correr tests"
-- **`/challenge/:id`** — enunciado, restricciones y último resultado de un reto
-- **`/leaderboard`** — ranking local (por retos verdes y tiempo total)
-- **`/submit`** — registra tu nombre y matrícula para aparecer en el leaderboard
-- **`/finalize`** — cierra tu tiempo final cuando terminaste
+- **`/`** — grid con los 7 retos. Cada tarjeta tiene un botón **"Correr tests"** para ese reto, y arriba del grid hay un botón **"Correr toda la suite"** equivalente a `npm test`.
+- **`/challenge/:id`** — enunciado, restricciones y botón para correr ese reto.
 
-El dashboard corre `jest` en un subproceso y muestra resultados en vivo. La CLI sigue siendo la fuente de verdad (`npm test`).
+El dashboard ejecuta `jest` en un subproceso y muestra el resultado en vivo. La CLI sigue siendo la fuente de verdad (`npm test`). Usa el botón global al final para asegurarte de que **todo** sigue verde.
 
 ---
 

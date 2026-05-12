@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
 
 function createApp() {
@@ -12,19 +11,8 @@ function createApp() {
   app.use(express.json());
   app.use('/static', express.static(path.join(__dirname, 'src', 'public')));
 
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || 'refactor-race-secret',
-      resave: false,
-      saveUninitialized: false,
-      cookie: { httpOnly: true, sameSite: 'lax' },
-    })
-  );
-
   app.use(require('./src/routes/index'));
   app.use(require('./src/routes/runner'));
-  app.use(require('./src/routes/submit'));
-  app.use(require('./src/routes/leaderboard'));
 
   app.use((err, req, res, next) => {
     console.error(err);
