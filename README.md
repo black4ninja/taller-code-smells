@@ -114,6 +114,7 @@ El dashboard corre `jest` en subprocess y muestra resultados en vivo. CLI sigue 
 
 ## Cheatsheets
 
+- [`docs/PRESENTACION.html`](docs/PRESENTACION.html) - introduccion al taller (~15 min, abrir en navegador)
 - [`docs/SMELLS_REFERENCE.md`](docs/SMELLS_REFERENCE.md) - los 11 code smells con sintoma y fix
 - [`docs/REFACTOR_CHEATSHEET.md`](docs/REFACTOR_CHEATSHEET.md) - 9 tecnicas con plantillas antes/despues
 - [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md) - C0 resuelto paso a paso

@@ -4,19 +4,21 @@ Guia operativa del taller. **No compartir con alumnos.**
 
 ---
 
-## Cronograma sugerido (1h 40min)
+## Cronograma sugerido (~1h 55min total con intro)
 
 | Tiempo | Actividad |
 |--------|-----------|
-| 0-10 min | Setup: clonar, `npm install`, `npm start`, `npm test` |
-| 10-20 min | Walkthrough C0 en pantalla (sigue `docs/WALKTHROUGH.md`) |
-| 20-35 min | Trabajo C1 (~13 min) + check de progreso |
-| 35-50 min | Trabajo C2 (~13 min) |
-| 50-65 min | Trabajo C3 (~13 min) |
-| 65-80 min | Trabajo C4 (~13 min) |
-| 80-95 min | Trabajo C5 (~13 min) |
-| 95-105 min | Trabajo C6 (~10 min final apretado) |
-| 105-110 min | Cierre: leaderboard, reflexion, premios |
+| 0-15 min | **Presentacion** (abre `docs/PRESENTACION.html` en navegador, modo fullscreen con tecla `F`) |
+| 15-25 min | Setup: clonar, `npm install`, `npm start`, `npm test` |
+| 25-35 min | Walkthrough C0 en pantalla (sigue `docs/WALKTHROUGH.md`) |
+| 35-50 min | Trabajo C1 (~13 min) + check de progreso |
+| 50-65 min | Trabajo C2 (~13 min) |
+| 65-80 min | Trabajo C3 (~13 min) |
+| 80-95 min | Trabajo C4 (~13 min) |
+| 95-110 min | Trabajo C5 (~13 min) |
+| 110-120 min | Trabajo C6 (~10 min) + Cierre: leaderboard, reflexion |
+
+> Si necesitas apretar a 1h 40min: salta el setup como bloque (que cada alumno lo haga antes de llegar) y comienza con la presentacion + walkthrough C0 = 25 min, dejando 75 min para los 6 retos (~12 min c/u).
 
 ---
 

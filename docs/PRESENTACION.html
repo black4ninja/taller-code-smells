@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Refactor Race - Introduccion (TC3004B)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0d1117; color: #c9d1d9;
+    font-family: 'Menlo', 'Monaco', 'Consolas', monospace; overflow: hidden; }
+  .deck { position: relative; height: 100vh; width: 100vw; }
+  .slide {
+    position: absolute; inset: 0; padding: 6vh 8vw;
+    display: flex; flex-direction: column; justify-content: center;
+    opacity: 0; transition: opacity 220ms ease; pointer-events: none;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  h1 { color: #58a6ff; font-size: 3em; margin-bottom: 0.4em; line-height: 1.1; }
+  h2 { color: #58a6ff; font-size: 2.2em; margin-bottom: 0.6em; line-height: 1.15; }
+  h3 { color: #f0f6fc; font-size: 1.4em; margin-bottom: 0.5em; }
+  p { font-size: 1.2em; line-height: 1.5; margin-bottom: 0.6em; max-width: 1100px; }
+  ul, ol { font-size: 1.15em; line-height: 1.6; margin-left: 1.5em; max-width: 1100px; }
+  li { margin-bottom: 0.3em; }
+  code { background: #161b22; color: #ff7b72; padding: 2px 8px; border-radius: 4px; font-size: 0.95em; }
+  pre {
+    background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+    padding: 16px 20px; font-size: 0.95em; line-height: 1.45; overflow-x: auto;
+    color: #c9d1d9; max-width: 100%;
+  }
+  pre.bad  { border-left: 4px solid #f85149; }
+  pre.good { border-left: 4px solid #3fb950; }
+  .pre-label {
+    display: inline-block; font-size: 0.85em; padding: 2px 10px; border-radius: 12px;
+    margin-bottom: 6px; font-weight: bold;
+  }
+  .pre-label.bad  { color: #f85149; border: 1px solid #f85149; }
+  .pre-label.good { color: #3fb950; border: 1px solid #3fb950; }
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; max-width: 1300px; }
+  .card {
+    background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .card .num { color: #58a6ff; font-weight: bold; font-size: 1.4em; }
+  .card .name { color: #f0f6fc; font-weight: bold; font-size: 1.05em; margin: 4px 0; }
+  .card .fix { color: #79c0ff; font-size: 0.9em; }
+  .card .why { color: #8b949e; font-size: 0.92em; line-height: 1.4; }
+  .ascii { color: #58a6ff; font-size: 11px; line-height: 1.1; white-space: pre; }
+  .subtitle { color: #8b949e; font-size: 1.2em; margin-top: 0.3em; }
+  .accent { color: #d29922; }
+  .ok { color: #3fb950; }
+  .fail { color: #f85149; }
+  .center { text-align: center; }
+  .footer {
+    position: fixed; bottom: 16px; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 24px; font-size: 13px; color: #6e7681;
+  }
+  .progress { display: flex; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #30363d; }
+  .dot.active { background: #58a6ff; }
+  .nav-hint { color: #6e7681; }
+  kbd {
+    background: #161b22; border: 1px solid #30363d; border-radius: 4px;
+    padding: 2px 8px; font-size: 0.85em; color: #c9d1d9;
+  }
+  .key { color: #d29922; font-weight: bold; }
+  .small { font-size: 0.95em; color: #8b949e; }
+  .checklist li::before { content: '> '; color: #58a6ff; }
+  .checklist { list-style: none; margin-left: 0; }
+  .quote {
+    border-left: 4px solid #58a6ff; padding-left: 16px;
+    font-style: italic; color: #c9d1d9; font-size: 1.25em;
+    max-width: 1000px;
+  }
+  .quote .who { display: block; color: #8b949e; font-style: normal; margin-top: 8px; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Portada -->
+  <section class="slide active">
+    <pre class="ascii">
+ ____       __            _              ____
+|  _ \ ___ / _| __ _  ___| |_ ___  _ __ |  _ \ __ _  ___ ___
+| |_) / _ \ |_ / _` |/ __| __/ _ \| '__|| |_) / _` |/ __/ _ \
+|  _ &lt;  __/  _| (_| | (__| || (_) | |   |  _ &lt; (_| | (_|  __/
+|_| \_\___|_|  \__,_|\___|\__\___/|_|   |_| \_\__,_|\___\___|
+    </pre>
+    <h1>Refactor Race</h1>
+    <p class="subtitle">Taller de identificacion y refactorizacion de code smells</p>
+    <p class="subtitle">TC3004B - ITESM</p>
+    <p style="margin-top: 32px;" class="small">Duracion: 1h 40min. Usa <kbd>&rarr;</kbd> o <kbd>espacio</kbd> para avanzar.</p>
+  </section>
+
+  <!-- Slide 2: Objetivo -->
+  <section class="slide">
+    <h2>El objetivo de hoy</h2>
+    <p>Implementar 7 funciones desde cero.</p>
+    <p>Pero con una <span class="accent">trampa pedagogica</span>: los tests no solo validan que <span class="ok">funcionen</span>. Tambien miden:</p>
+    <ul>
+      <li>lineas por funcion (LOC)</li>
+      <li>complejidad ciclomatica</li>
+      <li>anidamiento</li>
+      <li>numero de parametros</li>
+      <li>uso de <code>switch</code>, <code>if</code>, <code>+=</code> sobre strings</li>
+      <li>duplicacion</li>
+    </ul>
+    <p style="margin-top: 18px;" class="accent">El junior que llevas dentro hoy va a sufrir. Y a aprender.</p>
+  </section>
+
+  <!-- Slide 3: Definicion -->
+  <section class="slide">
+    <h2>&iquest;Que es un <em>code smell</em>?</h2>
+    <blockquote class="quote">
+      "Un code smell es una pista superficial que habitualmente corresponde a un problema mas profundo en el sistema."
+      <span class="who">- Martin Fowler, <em>Refactoring</em> (1999)</span>
+    </blockquote>
+    <p style="margin-top: 24px;"><strong>Clave:</strong> el codigo <span class="ok">funciona</span>, pero <span class="fail">huele mal</span>.</p>
+    <p>Smell = sintoma. Refactor = tratamiento. No confundir.</p>
+    <p class="small" style="margin-top: 12px;">Buenos linters detectan algunos automaticamente. Para el resto: experiencia + revision.</p>
+  </section>
+
+  <!-- Slide 4: Los 11 smells del temario -->
+  <section class="slide">
+    <h2>Los 11 code smells del temario</h2>
+    <div class="grid">
+      <div class="card"><span class="num">1</span><div class="name">Rigidez</div><div class="why">Cambiar X obliga a cambiar Y, Z, W.</div></div>
+      <div class="card"><span class="num">2</span><div class="name">Fragilidad</div><div class="why">Un cambio rompe cosas no relacionadas.</div></div>
+      <div class="card"><span class="num">3</span><div class="name">Inmovilidad</div><div class="why">No puedes reusar un componente fuera.</div></div>
+      <div class="card"><span class="num">4</span><div class="name">Viscosidad</div><div class="why">El atajo malo es mas facil que el bueno.</div></div>
+      <div class="card"><span class="num">5</span><div class="name">Codigo duplicado</div><div class="why">El mismo bloque en varios lugares.</div></div>
+      <div class="card"><span class="num">6</span><div class="name">Metodo largo</div><div class="why">&gt; 15-20 lineas. Hace muchas cosas.</div></div>
+      <div class="card"><span class="num">7</span><div class="name">Clase grande</div><div class="why">God object. Demasiadas responsabilidades.</div></div>
+      <div class="card"><span class="num">8</span><div class="name">Lista larga de parametros</div><div class="why">&gt; 3-4 args sueltos del mismo dominio.</div></div>
+      <div class="card"><span class="num">9</span><div class="name">Obsesion primitiva</div><div class="why">Strings/ints para representar dominio.</div></div>
+      <div class="card"><span class="num">10</span><div class="name">Envidia de caracteristicas</div><div class="why">Metodo que usa mas de otra clase.</div></div>
+      <div class="card"><span class="num">11</span><div class="name">Switch excesivo</div><div class="why"><code>switch(tipo)</code> con muchas ramas.</div></div>
+    </div>
+    <p class="small" style="margin-top: 18px;">Hoy tocaremos los marcados en los 7 retos del taller.</p>
+  </section>
+
+  <!-- Slide 5: Switch excesivo (C1) -->
+  <section class="slide">
+    <h2>Smell #11: <span class="fail">Switch excesivo</span></h2>
+    <p>Reto <code>C1</code>. Cada vez que agregas un tipo, tocas la funcion. Viola <strong>OCP</strong>.</p>
+    <div class="columns">
+      <div>
+        <span class="pre-label bad">junior</span>
+<pre class="bad">function descuento(tipo, monto) {
+  switch (tipo) {
+    case 'regular': return 0;
+    case 'plata':   return monto*0.05;
+    case 'oro':     return monto*0.10;
+    case 'diamante':return monto*0.15;
+    case 'empleado':return monto*0.25;
+    default: throw new Error('?');
+  }
+}</pre>
+      </div>
+      <div>
+        <span class="pre-label good">refactor</span>
+<pre class="good">const TASAS = {
+  regular: 0, plata: 0.05, oro: 0.10,
+  diamante: 0.15, empleado: 0.25
+};
+
+function descuento(tipo, monto) {
+  const t = TASAS[tipo];
+  if (t === undefined) throw new Error('?');
+  return monto * t;
+}</pre>
+      </div>
+    </div>
+    <p style="margin-top: 14px;"><strong>Tecnica:</strong> <em>Replace Conditional with Polymorphism</em> (en JS: map de estrategias).</p>
+  </section>
+
+  <!-- Slide 6: Long params + nesting (C2) -->
+  <section class="slide">
+    <h2>Smell #8: <span class="fail">Lista larga de parametros</span></h2>
+    <p>Reto <code>C2</code>. Acompanyado de anidamiento profundo (Rigidez).</p>
+    <div class="columns">
+      <div>
+        <span class="pre-label bad">junior</span>
+<pre class="bad">function puedeAcceder(
+  userId, role, banned,
+  recursoId, ownerId,
+  esPublico, ahora
+) {
+  if (role === 'admin') {
+    if (!banned) {
+      return true;
+    } else { return false; }
+  } else {
+    // ...
+  }
+}</pre>
+      </div>
+      <div>
+        <span class="pre-label good">refactor</span>
+<pre class="good">function puedeAcceder(user, recurso) {
+  if (user.banned) return false;
+  if (user.role === 'admin') return true;
+  if (recurso.esPublico) return true;
+  return user.id === recurso.ownerId;
+}</pre>
+      </div>
+    </div>
+    <p style="margin-top: 14px;"><strong>Tecnicas:</strong> <em>Introduce Parameter Object</em> + <em>Guard Clauses</em> (early return).</p>
+  </section>
+
+  <!-- Slide 7: Obsesion primitiva (C3) -->
+  <section class="slide">
+    <h2>Smell #9: <span class="fail">Obsesion primitiva</span></h2>
+    <p>Reto <code>C3</code>. Strings sueltos para algo que es un concepto del dominio.</p>
+    <div class="columns">
+      <div>
+        <span class="pre-label bad">junior</span>
+<pre class="bad">function formatear(
+  calle, numero, colonia,
+  ciudad, estado, cp, pais
+) {
+  let r = '';
+  if (calle) r += calle;
+  if (numero) r += ' ' + numero;
+  if (colonia) r += ', ' + colonia;
+  // ... 4 ifs mas con +=
+  return r;
+}</pre>
+      </div>
+      <div>
+        <span class="pre-label good">refactor</span>
+<pre class="good">function formatearDireccion(dir) {
+  return [
+    [dir.calle, dir.numero]
+      .filter(Boolean).join(' '),
+    dir.colonia,
+    [dir.ciudad, dir.estado, dir.cp]
+      .filter(Boolean).join(' '),
+    dir.pais
+  ].filter(Boolean).join(', ');
+}</pre>
+      </div>
+    </div>
+    <p style="margin-top: 14px;"><strong>Tecnicas:</strong> <em>Parameter Object</em> + <code>filter(Boolean).join()</code> en lugar de <code>+=</code>.</p>
+  </section>
+
+  <!-- Slide 8: Metodo largo (C0, C4) -->
+  <section class="slide">
+    <h2>Smell #6: <span class="fail">Metodo largo</span></h2>
+    <p>Retos <code>C0</code> y <code>C4</code>. Una funcion que hace 5 cosas tiene 5 razones para cambiar.</p>
+    <div class="columns">
+      <div>
+        <span class="pre-label bad">junior</span>
+<pre class="bad">function total(items) {
+  let s = 0;
+  for (const it of items) {
+    if (it.esEnvio) {
+      s += it.precio * it.cantidad;
+    } else {
+      const sub = it.precio * it.cantidad;
+      const iva = sub * 0.16;
+      s += sub + iva;
+    }
+  }
+  return s;
+}</pre>
+      </div>
+      <div>
+        <span class="pre-label good">refactor</span>
+<pre class="good">const IVA = 0.16;
+
+function precioConIva(it) {
+  const base = it.precio * it.cantidad;
+  return it.esEnvio
+    ? base : base * (1 + IVA);
+}
+
+function total(items) {
+  return items
+    .reduce((s, it) =>
+      s + precioConIva(it), 0);
+}</pre>
+      </div>
+    </div>
+    <p style="margin-top: 14px;"><strong>Tecnica:</strong> <em>Extract Method</em>. Una funcion = una idea.</p>
+  </section>
+
+  <!-- Slide 9: Tecnicas y principios -->
+  <section class="slide">
+    <h2>El arsenal: tecnicas + principios</h2>
+    <div class="columns">
+      <div>
+        <h3 style="color: #79c0ff;">9 tecnicas de refactor</h3>
+        <ul class="small">
+          <li><strong>Extract Method</strong> &mdash; saca bloques cohesivos</li>
+          <li><strong>Replace Conditional with Polymorphism</strong> &mdash; mata el switch</li>
+          <li><strong>Introduce Parameter Object</strong> &mdash; agrupa args sueltos</li>
+          <li><strong>Extract Class</strong> &mdash; conceptos del dominio</li>
+          <li><strong>Move Method</strong> &mdash; ponlo donde pertenece</li>
+          <li><strong>Compose Method</strong> &mdash; orquestador delgado</li>
+          <li><strong>Guard Clauses</strong> &mdash; early return</li>
+          <li><strong>Null Object</strong> &mdash; mata los if x === null</li>
+          <li><strong>Dependency Injection</strong> &mdash; recibe, no instancies</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #d29922;">Principios de fondo</h3>
+        <ul class="small">
+          <li><strong>SOLID</strong>
+            <ul>
+              <li>SRP: una razon para cambiar</li>
+              <li>OCP: abierto a extender, cerrado a modificar</li>
+              <li>LSP: subtipos no rompen</li>
+              <li>ISP: interfaces minimas</li>
+              <li>DIP: depende de abstracciones</li>
+            </ul>
+          </li>
+          <li><strong>DRY</strong> &mdash; no te repitas</li>
+          <li><strong>KISS</strong> &mdash; no compliques sin necesidad</li>
+          <li><strong>Tell, Don't Ask</strong> &mdash; pidele al objeto que actue</li>
+          <li><strong>Law of Demeter</strong> &mdash; habla solo con tus amigos</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top: 16px;">Ver <code>docs/REFACTOR_CHEATSHEET.md</code> con plantillas antes/despues.</p>
+  </section>
+
+  <!-- Slide 10: Anatomia de un reto -->
+  <section class="slide">
+    <h2>Anatomia de un reto</h2>
+    <ol>
+      <li>Abre <code>tests/refactor/CN_*.test.js</code> &mdash; lee que quiere</li>
+      <li>Abre <code>src/challenges/cN_*.js</code> &mdash; <span class="accent">aqui escribes</span></li>
+      <li>Escribe la version <strong>junior</strong>: lo primero que se te ocurra</li>
+      <li>Corre <code>npm run test:cN</code> &mdash; veras rojo</li>
+      <li>El mensaje del test te <strong>nombra el smell</strong> y sugiere la <strong>tecnica</strong>:</li>
+    </ol>
+<pre style="margin-top: 8px;">  La funcion "calcularDescuento" tiene 24 lineas (limite: 10).
+  <span class="fail">Smell: Metodo largo.</span>
+  <span class="ok">Tecnica sugerida: Extract Method.</span>
+  Referencia: docs/REFACTOR_CHEATSHEET.md#extract-method</pre>
+    <ol start="6">
+      <li>Refactoriza. Re-corre. Verde.</li>
+      <li>Llena tu fila en <code>docs/ENTREGABLE.md</code></li>
+    </ol>
+  </section>
+
+  <!-- Slide 11: Reglas y quality gates -->
+  <section class="slide">
+    <h2>Reglas del race</h2>
+    <ul class="checklist">
+      <li><strong>Individual.</strong> Codigo tuyo, en tu maquina.</li>
+      <li><strong>1h 40 min</strong> contados desde el banderazo.</li>
+      <li><strong>C0 es guiado</strong> &mdash; los primeros 10 min lo hago yo en pantalla con <code>docs/WALKTHROUGH.md</code>.</li>
+      <li><strong>Solo editas</strong> archivos en <code>src/challenges/</code>.</li>
+      <li><strong>NO toques</strong> <code>tests/refactor/</code> ni <code>src/lib/quality/</code> &mdash; hay test de integridad que detecta trampa.</li>
+      <li><strong>Gana</strong> quien tenga mas retos en verde. Desempate: tiempo en <code>/leaderboard</code>.</li>
+      <li><strong>Entregable paralelo:</strong> <code>docs/ENTREGABLE.md</code> con smell + tecnica + reflexion por reto.</li>
+    </ul>
+    <p style="margin-top: 18px;" class="small accent">Tip: si te atoras &gt; 10 min en un reto, abre <code>REFACTOR_CHEATSHEET.md</code> y busca tu smell.</p>
+  </section>
+
+  <!-- Slide 12: Empezar -->
+  <section class="slide center">
+    <pre class="ascii" style="margin: 0 auto; text-align: left; display: inline-block;">
+    _    _ _____ _____  ___  ___
+   | |  | / __  /  ___| / _ \ / _ \
+   | |  | `' / /\ `--. / /_\ \/ /_\ \
+   | |/\| | / /  `--. \|  _  ||  _  |
+   \  /\  /./ /__/\__/ /| | | || | | |
+    \/  \/ \_____|____/ \_| |_/\_| |_/
+    </pre>
+    <h1 style="margin-top: 20px;">A correr.</h1>
+    <p>1. <code>git clone</code> + <code>npm install</code> + <code>npm start</code></p>
+    <p>2. Abre <code>docs/WALKTHROUGH.md</code> &mdash; lo hago yo en pantalla.</p>
+    <p>3. Despues de C0: tu vs C1..C6.</p>
+    <p style="margin-top: 24px;" class="accent">El tiempo empieza cuando termine este slide.</p>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span class="nav-hint">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> o <kbd>espacio</kbd> | <kbd>F</kbd> fullscreen | <kbd>Home</kbd>/<kbd>End</kbd>
+  </span>
+  <div class="progress" id="progress"></div>
+  <span id="counter" class="small">1 / 12</span>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i));
+    progress.appendChild(d);
+  });
+
+  function go(idx) {
+    if (idx < 0) idx = 0;
+    if (idx >= slides.length) idx = slides.length - 1;
+    slides[current].classList.remove('active');
+    progress.children[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    progress.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+    else if (e.key === 'Home') { go(0); }
+    else if (e.key === 'End') { go(slides.length - 1); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('a, kbd, .dot')) return;
+    go(current + 1);
+  });
+</script>
+</body>
+</html>
