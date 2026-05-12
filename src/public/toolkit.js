@@ -90,11 +90,18 @@
     if (!item) return;
     const code = escapeHtml(item.examples[currentLang] || '// sin ejemplo en este lenguaje');
     const hljsClass = HLJS_LANG[currentLang] || 'plaintext';
+    const analogyBlock = item.analogy
+      ? `<aside class="tk-analogy">
+          <span class="tk-analogy-tag">Piénsalo así</span>
+          <p>${item.analogy}</p>
+        </aside>`
+      : '';
     detailEl.innerHTML = `
       <header class="tk-detail-head">
         <h2>${item.name}</h2>
         <p class="tk-short">${item.short}</p>
       </header>
+      ${analogyBlock}
       <section>
         <h3>Qué es</h3>
         <p>${item.description}</p>

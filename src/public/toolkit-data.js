@@ -14,6 +14,7 @@ window.TOOLKIT_DATA = {
     {
       id: 'rigidez', category: 'smells', name: 'Rigidez',
       short: 'Cambiar X obliga a cambiar Y, Z, W.',
+      analogy: 'Como una casa donde mover el sofá obliga a tirar la pared del cuarto vecino y reacomodar la cocina. Un cambio "chiquito" se convierte en una remodelación.',
       description: 'El sistema es difícil de modificar porque cada cambio se propaga a muchos lugares. Síntoma de acoplamiento alto.',
       howToFix: 'Aísla responsabilidades (SRP), introduce abstracciones (interfaces), usa inyección de dependencias para invertir el flujo de control.',
       examples: {
@@ -47,6 +48,7 @@ func envio(_ p: Double) -> Double { p * 1.16 + 50 }
     {
       id: 'fragilidad', category: 'smells', name: 'Fragilidad',
       short: 'Un cambio rompe cosas no relacionadas.',
+      analogy: 'Como un castillo de naipes: empujas una carta y caen tres del otro lado, en lugares que ni estabas tocando. Cada cambio es una ruleta.',
       description: 'El sistema se rompe en lugares inesperados cuando lo modificas. Suele venir de lógica copiada que no se actualiza en todos lados.',
       howToFix: 'Extract Method, eliminar duplicación, single source of truth, pruebas que cubran las ramificaciones.',
       examples: {
@@ -77,6 +79,7 @@ func api2(_ e: String) { if e.range(of: "@") == nil { fatalError() } }
     {
       id: 'inmovilidad', category: 'smells', name: 'Inmovilidad',
       short: 'No puedes reusar un componente fuera.',
+      analogy: 'Como un mueble hecho a la medida para un cuarto específico: precioso ahí, imposible llevarlo a otra casa. No cabe por la puerta, las medidas no sirven.',
       description: 'Un módulo está tan acoplado a su contexto (DB, framework, archivos) que no puedes llevártelo a otro proyecto sin arrastrar todo lo demás.',
       howToFix: 'Dependency Injection. Recibe dependencias por parámetro/constructor en lugar de instanciarlas adentro.',
       examples: {
@@ -114,6 +117,7 @@ func getUser(_ id: Int) -> User {
     {
       id: 'viscosidad', category: 'smells', name: 'Viscosidad',
       short: 'El atajo malo es más fácil que el bueno.',
+      analogy: 'Es ese estacionamiento donde está más cerca dejar el carro en doble fila que ir al cajón vacío del piso 3. Premiamos al flojo, y todos se vuelven flojos.',
       description: 'Hacer lo correcto cuesta tanto trabajo que terminas tomando atajos. El diseño "premia" la solución sucia.',
       howToFix: 'Construye utilidades comunes y patrones reusables para que la opción correcta sea trivial. Documenta el camino feliz.',
       examples: {
@@ -142,6 +146,7 @@ let user = User.make(name: n, email: e, age: a)`,
     {
       id: 'duplicado', category: 'smells', name: 'Código duplicado',
       short: 'El mismo bloque en varios lugares.',
+      analogy: 'Como tener tres relojes en distintas paredes. Cuando cambia el horario de verano, ¿te acuerdas de ajustar los tres? Uno siempre queda mal y nadie sabe cuál.',
       description: 'La misma lógica aparece copiada en distintas funciones o clases. Cualquier corrección hay que aplicarla N veces — y se nos olvida alguna.',
       howToFix: 'Extract Method. Si los datos varían, parametriza. Si la estructura es la misma con tipos distintos, usa polimorfismo o un map de estrategias.',
       examples: {
@@ -180,6 +185,7 @@ func total(_ items: [Item], factor: Double = 1.0) -> Double {
     {
       id: 'metodo-largo', category: 'smells', name: 'Método largo',
       short: 'Más de 15-20 líneas. Hace muchas cosas.',
+      analogy: 'Como una receta que en un solo paso dice "haz toda la cena". ¿Cómo la sigues? ¿Cómo se la enseñas a alguien? Mejor: pica, sazona, cocina, sirve. Cuatro pasos con nombre.',
       description: 'Una función que valida, calcula, formatea y persiste en una sola pieza. Difícil de leer, testear y reusar.',
       howToFix: 'Extract Method por bloques cohesivos. La función original queda como un Compose Method que solo orquesta llamadas con nombres claros.',
       examples: {
@@ -237,6 +243,7 @@ func checkout(_ cart: Cart, _ user: User) {
     {
       id: 'clase-grande', category: 'smells', name: 'Clase grande (God class)',
       short: 'Más de 200-300 líneas, muchos métodos públicos.',
+      analogy: 'Como ese amigo que es tu mecánico, dentista, abogado y consejero amoroso. Cuando se enoja, te quedas sin todos. Mejor un especialista por cosa.',
       description: 'Una clase que sabe demasiado y hace demasiado. Tiene varias razones para cambiar (viola SRP) y se vuelve un cuello de botella.',
       howToFix: 'Extract Class. Identifica grupos de métodos/campos que cambian juntos y muévelos a una clase nueva.',
       examples: {
@@ -294,6 +301,7 @@ class OrderExporter {}`,
     {
       id: 'long-params', category: 'smells', name: 'Lista larga de parámetros',
       short: 'Más de 3-4 parámetros sueltos.',
+      analogy: 'Es pedir un café diciendo: "leche sí, azúcar no, canela dos, caliente, mediano, para llevar, sin tapa…". Mejor: "lo de siempre" (tu preferencia ya es un objeto que el barista conoce).',
       description: 'Una función con muchos argumentos sueltos es difícil de llamar (¿cuál era el orden?), difícil de extender y suele indicar que varios parámetros pertenecen al mismo concepto.',
       howToFix: 'Introduce Parameter Object: agrupa los parámetros que viajan juntos en una estructura/clase con nombre.',
       examples: {
@@ -328,6 +336,7 @@ func crearUser(_ profile: Profile)`,
     {
       id: 'obsesion-primitiva', category: 'smells', name: 'Obsesión primitiva',
       short: 'Strings/ints para representar dominio.',
+      analogy: 'Es escribir un teléfono como string "+52 55 1234 5678" y validar cada vez que lo usas. Mejor un tipo Telefono que sabe qué es código, área y número, y rechaza basura desde su nacimiento.',
       description: 'Usar tipos básicos (string, int, bool) para representar conceptos del dominio (email, dinero, IDs) lleva a validaciones repetidas y errores fáciles de cometer.',
       howToFix: 'Extract Class / value object. Crea un tipo "Email", "Money", "UserId" que encapsule reglas de validación.',
       examples: {
@@ -376,6 +385,7 @@ func send(to: Email, body: String)`,
     {
       id: 'envidia', category: 'smells', name: 'Envidia de características',
       short: 'Un método usa más datos de otra clase.',
+      analogy: 'Es ese vecino que viene a tu cocina, abre tu refri, agarra tus ingredientes y prepara su sándwich. Mejor que lo prepare en su casa: ahí tiene los ingredientes.',
       description: 'Un método hace `otra.x`, `otra.y`, `otra.z` más que usar sus propios datos. Está envidiando a otra clase: probablemente pertenece allá.',
       howToFix: 'Move Method. Pasa el método a la clase cuyos datos usa. "Tell, Don\'t Ask".',
       examples: {
@@ -421,6 +431,7 @@ extension Factura { func total(con c: Cliente) -> Double { total * (1 - c.descue
     {
       id: 'switch', category: 'smells', name: 'Switch excesivo',
       short: 'switch(tipo) con muchas ramas.',
+      analogy: 'Es el guardia con lista en mano revisando 50 fotos para dejar entrar. Mejor que cada quien traiga su gafete y se identifique solo: el guardia no decide, solo deja pasar.',
       description: 'Cada vez que agregas un tipo nuevo, tocas el switch (violación de OCP). Suele aparecer junto con duplicación entre las ramas.',
       howToFix: 'Replace Conditional with Polymorphism. En lenguajes OO: subclases con método polimórfico. En JS/Py: mapa de estrategias por tipo.',
       examples: {
@@ -474,6 +485,7 @@ struct Circulo:  Figura { let r: Double;    func area() -> Double { .pi*r*r } }`
     {
       id: 'srp', category: 'solid', name: 'SRP — Single Responsibility',
       short: 'Una clase, una sola razón para cambiar.',
+      analogy: 'Un cuchillo debe cortar. Si también es destornillador, sacacorchos y peine, corta mal, atornilla mal y se ve horrible peinándote. Una herramienta, un propósito.',
       description: 'Cada clase/módulo debe tener una sola responsabilidad. Si una clase cambia por más de una razón (negocio cambia, formato cambia, persistencia cambia), divídela.',
       howToFix: 'Identifica los "actores" o "ejes de cambio" de la clase. Crea una clase por cada eje.',
       examples: {
@@ -521,6 +533,7 @@ class OrderMailer { func confirm(_ o: Order) {} }`,
     {
       id: 'ocp', category: 'solid', name: 'OCP — Open / Closed',
       short: 'Abierto a extender, cerrado a modificar.',
+      analogy: 'Como un enchufe en la pared: para conectar un ventilador nuevo no abres la pared ni cambias el cableado, solo lo enchufas. La pared está cerrada a cambios, pero abierta a recibir nuevos aparatos.',
       description: 'Debes poder agregar nuevos comportamientos sin modificar el código existente. Suele lograrse con polimorfismo o tablas de estrategias.',
       howToFix: 'En vez de modificar un switch cada que llega un caso nuevo, agrega una nueva clase/estrategia/función que cumpla con la abstracción común.',
       examples: {
@@ -561,6 +574,7 @@ func exportar(_ t: String, _ d: Data) -> String { FMT[t]!.format(d) }`,
     {
       id: 'lsp', category: 'solid', name: 'LSP — Liskov Substitution',
       short: 'Las subclases no rompen al padre.',
+      analogy: 'Si contratas un "pintor profesional", su reemplazo también debe pintar. No puede llegar un electricista y decir "esa pared rómpela, yo no pinto". El cliente espera el mismo trato.',
       description: 'Cualquier objeto de tipo T debería poder ser reemplazado por uno de su subtipo S sin alterar la corrección del programa. Si la subclase lanza excepción donde el padre no, viola LSP.',
       howToFix: 'No "estreches" precondiciones ni "ensanches" postcondiciones. Si una subclase no cumple el contrato, no es una subclase, es otra cosa.',
       examples: {
@@ -594,6 +608,7 @@ struct Square: Figura { let l: Double;    func area() -> Double { l*l } }`,
     {
       id: 'isp', category: 'solid', name: 'ISP — Interface Segregation',
       short: 'Interfaces pequeñas y específicas.',
+      analogy: 'Mejor 3 controles pequeños (tele, sonido, aire) que un control universal con 80 botones donde usas 4. Si compras una tele nueva, no necesitas los botones del aire.',
       description: 'Mejor varias interfaces pequeñas que una grande "todo en uno". Un cliente no debería estar forzado a depender de métodos que no usa.',
       howToFix: 'Divide interfaces grandes por rol. Que cada implementación implemente solo lo que de verdad necesita.',
       examples: {
@@ -640,6 +655,7 @@ struct Human: Workable, Eatable { func work() {}; func eat() {} }`,
     {
       id: 'dip', category: 'solid', name: 'DIP — Dependency Inversion',
       short: 'Depende de abstracciones, no de concreciones.',
+      analogy: 'El enchufe de la pared no sabe si conectas lámpara, ventilador o cargador. Todos cumplen el estándar "clavija de 2 patas". Cambias el aparato sin cambiar la pared.',
       description: 'Los módulos de alto nivel no deben depender de los de bajo nivel; ambos dependen de abstracciones. Las abstracciones no dependen de detalles.',
       howToFix: 'Define una interface para la dependencia. La concreta se inyecta por constructor/parámetro. Para testear, pasa un fake.',
       examples: {
@@ -685,6 +701,7 @@ Service(MySql()); Service(FakeDb())`,
     {
       id: 'encapsulacion', category: 'poo', name: 'Encapsulación',
       short: 'Esconde detalles, expón comportamiento.',
+      analogy: 'Como un cajero automático: tú aprietas botones (interface), pero no abres la máquina para mover billetes con la mano. Las reglas se cumplen siempre, sin importar quién use el cajero.',
       description: 'Los datos internos de un objeto se protegen; el mundo exterior interactúa a través de métodos públicos que mantienen los invariantes. Evita estados inválidos.',
       howToFix: 'Campos privados/internal. Validar en setters. Preferir métodos de comportamiento (`deposit(x)`) sobre setters genéricos (`setSaldo(x)`).',
       examples: {
@@ -728,6 +745,7 @@ public:
     {
       id: 'herencia', category: 'poo', name: 'Herencia',
       short: 'Especialización: B "es-un" A.',
+      analogy: 'Un Doberman es un Perro, que es un Animal. Hereda "respirar" y "comer" de Animal; "ladrar" de Perro; y agrega "asustar carteros" como Doberman. Suma comportamientos sin reescribirlos.',
       description: 'Una subclase reutiliza y extiende el comportamiento de su padre. Útil cuando hay una relación clara "es-un" y comparten contrato.',
       howToFix: 'Úsala con cuidado: si solo quieres reutilizar código, prefiere composición. Si hereda y rompe contrato, viola LSP.',
       examples: {
@@ -764,6 +782,7 @@ class Perro: Animal {
     {
       id: 'polimorfismo', category: 'poo', name: 'Polimorfismo',
       short: 'Mismo mensaje, múltiples comportamientos.',
+      analogy: 'Le dices "háblame" a un perro y ladra; a un gato y maúlla; a una persona y dice "hola". Mismo mensaje, respuesta apropiada para cada uno. Tú no necesitas saber qué animal es.',
       description: 'Diferentes clases responden al mismo método de forma distinta. Permite que el código cliente trabaje con la abstracción sin saber el tipo concreto.',
       howToFix: 'Define un contrato común (interface, clase abstracta, protocol). Cada tipo lo implementa a su manera. El cliente solo invoca la interface.',
       examples: {
@@ -801,6 +820,7 @@ struct Circulo:  Figura { let r: Double; func area() -> Double { .pi * r * r } }
     {
       id: 'abstraccion', category: 'poo', name: 'Abstracción',
       short: 'Modela lo esencial; oculta el resto.',
+      analogy: 'Cuando manejas un auto no piensas en pistones ni inyección: solo volante, freno, acelerador. La abstracción oculta la mecánica complicada y te entrega los controles esenciales.',
       description: 'Representas en código solo los atributos y comportamientos relevantes al problema. Una abstracción es un contrato que dice "qué hace" sin decir "cómo".',
       howToFix: 'Define interfaces o clases abstractas con los métodos esenciales. Los detalles concretos quedan en implementaciones intercambiables.',
       examples: {
@@ -844,6 +864,7 @@ struct MongoRepo:    Repository { /* ... */ }`,
     {
       id: 'composicion', category: 'poo', name: 'Composición sobre Herencia',
       short: 'Combina piezas en vez de heredar.',
+      analogy: 'Para un pato que vuele y nade no crees una clase "PatoQueVuelaYNada". Le pones una pieza "volar" y otra "nadar". Mañana sale un pato robot: le quitas "nadar" y le metes "cohete". Modular.',
       description: 'Prefiere construir comportamiento componiendo objetos pequeños en vez de heredar de jerarquías profundas. Más flexible y menos acoplado.',
       howToFix: 'Si solo necesitas reusar comportamiento, inyecta una dependencia que lo provea. Reserva la herencia para verdaderas relaciones "es-un".',
       examples: {
@@ -891,6 +912,7 @@ Duck(::rocketFly, ::fastSwim).perform()`,
     {
       id: 'dry', category: 'principles', name: 'DRY — Don\'t Repeat Yourself',
       short: 'Cada conocimiento, una sola representación.',
+      analogy: 'Es tener UNA receta de tu salsa secreta. Si la mejoras, la próxima cena ya sabe a la mejorada. No tres copias en cuadernos distintos donde nunca te acuerdas cuál era la buena.',
       description: 'Si el mismo conocimiento (regla, fórmula, validación) aparece duplicado, cualquier corrección debe aplicarse N veces. Extrae a una sola fuente de verdad.',
       howToFix: 'Cuando veas el mismo patrón 2-3 veces: Extract Method, constante, helper compartido o tabla de configuración.',
       examples: {
@@ -923,6 +945,7 @@ if !esAdulto(user) { fatalError("menor") }`,
     {
       id: 'kiss', category: 'principles', name: 'KISS — Keep It Simple, Stupid',
       short: 'No compliques sin necesidad.',
+      analogy: 'Para abrir una puerta no construyas un robot que abra puertas. Usa la manija. La solución obvia casi siempre es la correcta — y la que entenderá el que llegue después de ti.',
       description: 'La solución más simple que resuelve el problema casi siempre es la correcta. La complejidad cuesta: bugs, onboarding, mantenimiento.',
       howToFix: 'Empieza por la versión obvia. Solo agrega complejidad cuando un requisito real la justifica.',
       examples: {
@@ -947,6 +970,7 @@ func add(_ a: Int, _ b: Int) -> Int { a + b }`,
     {
       id: 'yagni', category: 'principles', name: 'YAGNI — You Aren\'t Gonna Need It',
       short: 'No construyas lo que no necesitas ya.',
+      analogy: 'No compres la silla de bebé "por si algún día tienes hijo". Si llega el bebé, la compras. Mientras tanto solo estorba en el clóset y junta polvo.',
       description: 'No agregues funcionalidad "por si acaso". Cada feature no usada cuesta mantenerla y agrega superficie para bugs. Construye cuando un requerimiento real aparece.',
       howToFix: 'Cuando dudes si algo se va a usar: no lo agregues. Es más barato agregarlo después que removerlo.',
       examples: {
@@ -967,6 +991,7 @@ bool login(const std::string& u, const std::string& p);`,
     {
       id: 'tell-dont-ask', category: 'principles', name: 'Tell, Don\'t Ask',
       short: 'Pídele al objeto que actúe, no le preguntes.',
+      analogy: 'En el restaurante NO le preguntas al cocinero "¿cuánto cuesta la pasta? ¿cuánta sal le pones? ¿está caliente?". Le dices "tráeme la pasta". Confía en el experto: él sabe su trabajo.',
       description: 'En lugar de extraer datos del objeto, hacer cálculos afuera y volver a meterle el resultado, dile que haga el trabajo él mismo. Encapsula comportamiento, no solo datos.',
       howToFix: 'Si ves un código que hace `if (obj.x > 0) obj.y = ...`, mueve esa lógica como método del objeto: `obj.activarSi...()`.',
       examples: {
@@ -991,6 +1016,7 @@ cuenta.retirar(monto)`,
     {
       id: 'demeter', category: 'principles', name: 'Law of Demeter',
       short: 'Habla solo con tus amigos directos.',
+      analogy: 'Al pagar le das tu tarjeta al mesero, no le das tu cartera para que él meta mano y vea qué más traes. Si pides un dato, pide solo ese — no la estructura completa donde vive.',
       description: 'Un método sólo debería llamar a métodos de: sí mismo, sus parámetros, los objetos que crea y sus campos directos. Cadenas como `a.b.c.d.e()` indican acoplamiento al detalle interno.',
       howToFix: 'Expón comportamiento, no estructura. Si necesitas datos profundos, agrega un método de fachada que los devuelva ya combinados.',
       examples: {
